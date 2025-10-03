@@ -43,6 +43,345 @@ PALETTE = {
 FONT_FAMILY = "Segoe UI"
 
 
+DEFAULT_LANGUAGE = "en"
+DEFAULT_CURRENCY = "USD"
+
+
+SUPPORTED_LANGUAGES: Dict[str, Dict[str, Any]] = {
+    "en": {"name": "English"},
+    "es": {"name": "Español"},
+}
+
+
+SUPPORTED_CURRENCIES: Dict[str, Dict[str, Any]] = {
+    "USD": {"name": "US Dollar", "symbol": "$", "pattern": "{symbol}{value:,.2f}"},
+    "EUR": {"name": "Euro", "symbol": "€", "pattern": "{value:,.2f} {symbol}"},
+    "MXN": {"name": "Peso mexicano", "symbol": "$", "pattern": "{symbol}{value:,.2f} MXN"},
+}
+
+
+TRANSLATIONS: Dict[str, Dict[str, str]] = {
+    "app.title": {"en": "POS System", "es": "Sistema POS"},
+    "tab.products": {"en": "Products", "es": "Productos"},
+    "tab.sales": {"en": "Sales", "es": "Ventas"},
+    "tab.history": {"en": "History", "es": "Historial"},
+    "tab.settings": {"en": "Settings", "es": "Configuración"},
+    "inventory.hero.title": {"en": "Inventory Studio", "es": "Estudio de Inventario"},
+    "inventory.hero.subtitle": {
+        "en": "Add, update, and monitor your catalog with instant insights.",
+        "es": "Agrega, actualiza y supervisa tu catálogo con información al instante.",
+    },
+    "inventory.hero.empty": {
+        "en": "No products in inventory yet.",
+        "es": "Aún no hay productos en el inventario.",
+    },
+    "inventory.hero.summary": {
+        "en": "{count} products • {value} inventory value",
+        "es": "{count} productos • {value} valor de inventario",
+    },
+    "inventory.card.form.title": {
+        "en": "New or Existing Product",
+        "es": "Producto nuevo o existente",
+    },
+    "field.product_id": {"en": "Product ID", "es": "ID del producto"},
+    "field.name": {"en": "Name", "es": "Nombre"},
+    "field.price": {"en": "Price", "es": "Precio"},
+    "field.stock": {"en": "Stock", "es": "Existencias"},
+    "action.add_product": {"en": "Add Product", "es": "Agregar producto"},
+    "action.update_product": {"en": "Update", "es": "Actualizar"},
+    "action.clear": {"en": "Clear", "es": "Limpiar"},
+    "action.refresh": {"en": "Refresh", "es": "Actualizar"},
+    "inventory.card.list.title": {"en": "Inventory", "es": "Inventario"},
+    "inventory.table.product": {"en": "Product", "es": "Producto"},
+    "inventory.table.price": {"en": "Price", "es": "Precio"},
+    "inventory.table.stock": {"en": "Stock", "es": "Existencias"},
+    "inventory.success.add": {
+        "en": "Product added successfully",
+        "es": "Producto agregado correctamente",
+    },
+    "inventory.success.update": {
+        "en": "Product updated successfully",
+        "es": "Producto actualizado correctamente",
+    },
+    "inventory.error.duplicate": {
+        "en": "Product ID already exists",
+        "es": "El ID del producto ya existe",
+    },
+    "inventory.error.database": {
+        "en": "Database error: {error}",
+        "es": "Error de base de datos: {error}",
+    },
+    "inventory.error.invalid": {
+        "en": "Price must be a number and stock must be an integer",
+        "es": "El precio debe ser un número y las existencias un entero",
+    },
+    "inventory.error.negative": {
+        "en": "Price and stock must be non-negative",
+        "es": "El precio y las existencias deben ser no negativos",
+    },
+    "inventory.error.required": {
+        "en": "Product ID and name are required",
+        "es": "El ID y el nombre del producto son obligatorios",
+    },
+    "sales.hero.title": {"en": "Sales Checkout", "es": "Caja de ventas"},
+    "sales.hero.subtitle": {
+        "en": "Scan items into the cart, monitor totals, and wrap receipts instantly.",
+        "es": "Escanea artículos al carrito, controla totales y emite recibos al instante.",
+    },
+    "sales.hero.empty": {"en": "Cart is empty.", "es": "El carrito está vacío."},
+    "sales.hero.summary": {
+        "en": "{count} {label} • {total}",
+        "es": "{count} {label} • {total}",
+    },
+    "sales.hero.items": {"en": "items", "es": "artículos"},
+    "sales.hero.item": {"en": "item", "es": "artículo"},
+    "sales.status.prompt": {
+        "en": "Ready to build a cart.",
+        "es": "Listo para armar un carrito.",
+    },
+    "sales.quick_add": {"en": "Quick Add", "es": "Agregar rápido"},
+    "field.quantity": {"en": "Quantity", "es": "Cantidad"},
+    "action.add_to_cart": {"en": "Add to Cart", "es": "Agregar al carrito"},
+    "action.remove_selected": {"en": "Remove Selected", "es": "Eliminar seleccionado"},
+    "action.clear_cart": {"en": "Clear Cart", "es": "Vaciar carrito"},
+    "sales.summary.title": {"en": "Checkout Summary", "es": "Resumen de pago"},
+    "label.subtotal": {"en": "Subtotal", "es": "Subtotal"},
+    "label.balance_due": {"en": "Balance Due", "es": "Saldo a pagar"},
+    "action.finalize_sale": {"en": "Finalize Sale", "es": "Finalizar venta"},
+    "action.print_invoice": {"en": "Print Invoice", "es": "Imprimir factura"},
+    "sales.cart.title": {"en": "Active Cart", "es": "Carrito activo"},
+    "sales.status.ready": {
+        "en": "Sale completed at {timestamp} • Invoice ready to print.",
+        "es": "Venta completada a las {timestamp} • Factura lista para imprimir.",
+    },
+    "sales.warning.empty": {
+        "en": "No items in cart to finalize",
+        "es": "No hay artículos en el carrito para finalizar",
+    },
+    "sales.warning.add_items": {
+        "en": "Add items to the cart before finalizing.",
+        "es": "Agrega artículos al carrito antes de finalizar.",
+    },
+    "sales.error.not_found": {
+        "en": "Product {product_id} no longer exists",
+        "es": "El producto {product_id} ya no existe",
+    },
+    "sales.error.insufficient_stock": {
+        "en": "Only {stock} units available for {name}",
+        "es": "Solo hay {stock} unidades disponibles de {name}",
+    },
+    "sales.error.generic": {
+        "en": "Failed to finalize sale. Please try again.",
+        "es": "No se pudo finalizar la venta. Inténtalo de nuevo.",
+    },
+    "sales.success.total": {
+        "en": "Total charged: {total}",
+        "es": "Total cobrado: {total}",
+    },
+    "sales.status.added": {
+        "en": "Added {quantity} × {name} to the cart.",
+        "es": "{quantity} × {name} agregado al carrito.",
+    },
+    "sales.status.updated": {
+        "en": "Updated {quantity} × {name} in the cart.",
+        "es": "{quantity} × {name} actualizado en el carrito.",
+    },
+    "sales.status.removed": {
+        "en": "Removed {name} from the cart.",
+        "es": "{name} eliminado del carrito.",
+    },
+    "sales.status.cleared": {
+        "en": "Cart cleared.",
+        "es": "Carrito vacío.",
+    },
+    "sales.status.invalid": {
+        "en": "Enter a valid product ID and quantity.",
+        "es": "Ingresa un ID de producto y cantidad válidos.",
+    },
+    "sales.error.quantity": {
+        "en": "Quantity must be a positive integer.",
+        "es": "La cantidad debe ser un entero positivo.",
+    },
+    "sales.status.stock": {
+        "en": "Only {stock} left for {name}.",
+        "es": "Solo quedan {stock} de {name}.",
+    },
+    "sales.status.not_found": {
+        "en": "Product ID not found in inventory.",
+        "es": "ID de producto no encontrado en el inventario.",
+    },
+    "sales.status.select_item": {
+        "en": "Select an item to remove from the cart.",
+        "es": "Selecciona un artículo para quitar del carrito.",
+    },
+    "sales.status.no_longer_exists": {
+        "en": "Product {product_id} no longer exists.",
+        "es": "El producto {product_id} ya no existe.",
+    },
+    "sales.dialog.invalid_quantity": {
+        "en": "Invalid quantity",
+        "es": "Cantidad inválida",
+    },
+    "sales.cart.heading.product_id": {"en": "Product Id", "es": "ID"},
+    "sales.cart.heading.name": {"en": "Name", "es": "Nombre"},
+    "sales.cart.heading.price": {"en": "Price", "es": "Precio"},
+    "sales.cart.heading.quantity": {"en": "Qty", "es": "Cant."},
+    "sales.cart.heading.total": {"en": "Total", "es": "Total"},
+    "history.hero.title": {"en": "Purchase History", "es": "Historial de compras"},
+    "history.hero.subtitle": {
+        "en": "Browse previous receipts, revisit totals, and reprint invoices on demand.",
+        "es": "Explora recibos anteriores, revisa totales y reimprime facturas al instante.",
+    },
+    "history.hero.empty": {
+        "en": "No purchases recorded yet.",
+        "es": "Aún no se registran compras.",
+    },
+    "history.hero.summary": {
+        "en": "{count} sales • {revenue} revenue captured",
+        "es": "{count} ventas • {revenue} ingresos registrados",
+    },
+    "history.card.title": {"en": "Recent Sales", "es": "Ventas recientes"},
+    "history.refresh": {"en": "Refresh", "es": "Actualizar"},
+    "history.table.sale_id": {"en": "Sale #", "es": "Venta #"},
+    "history.table.timestamp": {"en": "Completed", "es": "Completada"},
+    "history.table.items": {"en": "Items", "es": "Artículos"},
+    "history.table.subtotal": {"en": "Subtotal", "es": "Subtotal"},
+    "history.table.total": {"en": "Total", "es": "Total"},
+    "history.details.title": {"en": "Sale Details", "es": "Detalles de la venta"},
+    "history.details.none": {
+        "en": "Select a sale to see its details.",
+        "es": "Selecciona una venta para ver sus detalles.",
+    },
+    "history.details.line": {
+        "en": "{quantity} × {name} (@ {price}) = {total}",
+        "es": "{quantity} × {name} (@ {price}) = {total}",
+    },
+    "history.details.subtotal": {"en": "Subtotal: {value}", "es": "Subtotal: {value}"},
+    "history.details.total": {"en": "Balance Due: {value}", "es": "Total: {value}"},
+    "history.action.open": {"en": "Open Invoice", "es": "Abrir factura"},
+    "history.info.none": {
+        "en": "No sale selected",
+        "es": "No hay venta seleccionada",
+    },
+    "history.info.select": {
+        "en": "Select a sale to open its invoice.",
+        "es": "Selecciona una venta para abrir su factura.",
+    },
+    "history.status.updated": {
+        "en": "History refreshed.",
+        "es": "Historial actualizado.",
+    },
+    "invoice.title": {"en": "Invoice Preview", "es": "Vista previa de factura"},
+    "invoice.header": {"en": "POS System Invoice", "es": "Factura del sistema POS"},
+    "invoice.columns": {
+        "en": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
+        "es": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
+    },
+    "invoice.column.id": {"en": "ID", "es": "ID"},
+    "invoice.column.product": {"en": "Product", "es": "Producto"},
+    "invoice.column.qty": {"en": "Qty", "es": "Cant."},
+    "invoice.column.price": {"en": "Price", "es": "Precio"},
+    "invoice.column.total": {"en": "Total", "es": "Total"},
+    "invoice.sale_number": {"en": "Sale #", "es": "Venta #"},
+    "invoice.completed": {"en": "Completed:", "es": "Completado:"},
+    "invoice.subtotal": {"en": "Subtotal:", "es": "Subtotal:"},
+    "invoice.total": {"en": "Balance Due:", "es": "Total:"},
+    "invoice.footer": {
+        "en": "Thank you for shopping with us!",
+        "es": "¡Gracias por su compra!",
+    },
+    "invoice.save": {"en": "Save As…", "es": "Guardar como…"},
+    "invoice.print": {"en": "Print", "es": "Imprimir"},
+    "invoice.close": {"en": "Close", "es": "Cerrar"},
+    "invoice.save.title": {"en": "Save invoice", "es": "Guardar factura"},
+    "invoice.save.error": {
+        "en": "Could not save invoice: {error}",
+        "es": "No se pudo guardar la factura: {error}",
+    },
+    "invoice.save.success": {
+        "en": "Invoice saved to {path}",
+        "es": "Factura guardada en {path}",
+    },
+    "invoice.print.sent": {
+        "en": "Invoice sent to the default printer.",
+        "es": "Factura enviada a la impresora predeterminada.",
+    },
+    "invoice.print.missing": {
+        "en": "The system printing utility was not found. Save the invoice and print manually.",
+        "es": "No se encontró la utilidad de impresión del sistema. Guarda la factura e imprímela manualmente.",
+    },
+    "invoice.print.error": {
+        "en": "Could not print invoice: {error}",
+        "es": "No se pudo imprimir la factura: {error}",
+    },
+    "sales.invoice.none.title": {
+        "en": "No invoice",
+        "es": "Sin factura",
+    },
+    "sales.invoice.none.message": {
+        "en": "Complete a sale to print an invoice.",
+        "es": "Completa una venta para imprimir una factura.",
+    },
+    "sales.error.database": {
+        "en": "Failed to finalize sale: {error}",
+        "es": "No se pudo finalizar la venta: {error}",
+    },
+    "settings.hero.title": {"en": "Preferences", "es": "Preferencias"},
+    "settings.hero.subtitle": {
+        "en": "Tailor language and currency to match your sales counter.",
+        "es": "Adapta el idioma y la moneda a tu mostrador de ventas.",
+    },
+    "settings.language.label": {"en": "Language", "es": "Idioma"},
+    "settings.currency.label": {"en": "Currency", "es": "Moneda"},
+    "settings.apply": {"en": "Apply Changes", "es": "Aplicar cambios"},
+    "settings.notice": {
+        "en": "Settings updated successfully.",
+        "es": "Configuración actualizada correctamente.",
+    },
+    "dialog.success": {"en": "Success", "es": "Éxito"},
+    "dialog.error": {"en": "Error", "es": "Error"},
+    "dialog.warning": {"en": "Warning", "es": "Advertencia"},
+    "dialog.info": {"en": "Information", "es": "Información"},
+    "sales.dialog.empty": {
+        "en": "Empty cart",
+        "es": "Carrito vacío",
+    },
+    "sales.dialog.not_found": {
+        "en": "Error",
+        "es": "Error",
+    },
+    "sales.dialog.stock": {
+        "en": "Insufficient stock",
+        "es": "Stock insuficiente",
+    },
+    "settings.applied.status": {
+        "en": "Language changed to {language}, currency set to {currency}.",
+        "es": "Idioma cambiado a {language}, moneda establecida en {currency}.",
+    },
+}
+
+
+def translate(language: str, key: str, **kwargs: Any) -> str:
+    catalog = TRANSLATIONS.get(key, {})
+    template = catalog.get(language) or catalog.get(DEFAULT_LANGUAGE) or key
+    try:
+        return template.format(**kwargs)
+    except (KeyError, IndexError, ValueError):
+        return template
+
+
+def format_currency(amount: float, currency_code: str) -> str:
+    currency = SUPPORTED_CURRENCIES.get(currency_code, SUPPORTED_CURRENCIES[DEFAULT_CURRENCY])
+    pattern = currency.get("pattern", "{symbol}{value:,.2f}")
+    value = amount
+    return pattern.format(symbol=currency.get("symbol", "$"), value=value, code=currency_code)
+
+
+def get_currency_display(currency_code: str) -> str:
+    currency = SUPPORTED_CURRENCIES.get(currency_code, SUPPORTED_CURRENCIES[DEFAULT_CURRENCY])
+    return f"{currency_code} • {currency['name']}"
+
+
 @dataclass
 class Product:
     """Represents a product record."""
@@ -101,7 +440,49 @@ class DatabaseManager:
                 )
                 """
             )
+            cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS settings (
+                    key TEXT PRIMARY KEY,
+                    value TEXT NOT NULL
+                )
+                """
+            )
+            for key, value in ("language", DEFAULT_LANGUAGE), ("currency", DEFAULT_CURRENCY):
+                cursor.execute(
+                    "INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)",
+                    (key, value),
+                )
             conn.commit()
+
+    def get_setting(self, key: str, default: Optional[str] = None) -> str:
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT value FROM settings WHERE key = ?", (key,))
+            row = cursor.fetchone()
+        if row is None:
+            return default if default is not None else ""
+        return str(row[0])
+
+    def set_setting(self, key: str, value: str) -> None:
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "INSERT INTO settings (key, value) VALUES (?, ?) "
+                "ON CONFLICT(key) DO UPDATE SET value = excluded.value",
+                (key, value),
+            )
+            conn.commit()
+
+    def get_app_settings(self) -> Dict[str, str]:
+        return {
+            "language": self.get_setting("language", DEFAULT_LANGUAGE) or DEFAULT_LANGUAGE,
+            "currency": self.get_setting("currency", DEFAULT_CURRENCY) or DEFAULT_CURRENCY,
+        }
+
+    def update_app_settings(self, language: str, currency: str) -> None:
+        self.set_setting("language", language)
+        self.set_setting("currency", currency)
 
     def add_product(self, product: Product) -> None:
         with self._get_connection() as conn:
@@ -249,15 +630,35 @@ class DatabaseManager:
 class ProductManagerFrame(ttk.Frame):
     """GUI for managing product inventory."""
 
-    def __init__(self, parent: tk.Widget, db: DatabaseManager, on_inventory_change) -> None:
+    def __init__(
+        self,
+        parent: tk.Widget,
+        db: DatabaseManager,
+        on_inventory_change,
+        app: "POSApp",
+    ) -> None:
         super().__init__(parent, padding=20, style="Background.TFrame")
         self.db = db
         self.on_inventory_change = on_inventory_change
-        self.summary_var = tk.StringVar(value="No products in inventory yet.")
+        self.app = app
+        self.summary_var = tk.StringVar()
         self.product_id_var = tk.StringVar()
         self.name_var = tk.StringVar()
         self.price_var = tk.StringVar()
         self.stock_var = tk.StringVar()
+
+        self.hero_title_var = tk.StringVar()
+        self.hero_subtitle_var = tk.StringVar()
+        self.form_title_var = tk.StringVar()
+        self.product_id_label_var = tk.StringVar()
+        self.name_label_var = tk.StringVar()
+        self.price_label_var = tk.StringVar()
+        self.stock_label_var = tk.StringVar()
+        self.inventory_title_var = tk.StringVar()
+        self.add_button_text = tk.StringVar()
+        self.update_button_text = tk.StringVar()
+        self.clear_button_text = tk.StringVar()
+        self.refresh_button_text = tk.StringVar()
 
         self.container = ttk.Frame(self, style="Background.TFrame")
         self.container.grid(row=0, column=0, sticky="nsew")
@@ -268,6 +669,7 @@ class ProductManagerFrame(ttk.Frame):
         self.container.grid_rowconfigure(1, weight=1)
 
         self._build_ui()
+        self.apply_settings()
         self.refresh_products()
 
     def _build_ui(self) -> None:
@@ -277,12 +679,12 @@ class ProductManagerFrame(ttk.Frame):
         hero.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 24))
         hero.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(hero, text="Inventory Studio", style="HeroTitle.TLabel").grid(
+        ttk.Label(hero, textvariable=self.hero_title_var, style="HeroTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Label(
             hero,
-            text="Add, update, and monitor your catalog with instant insights.",
+            textvariable=self.hero_subtitle_var,
             style="HeroSubtitle.TLabel",
         ).grid(row=1, column=0, sticky="w", pady=(4, 0))
         ttk.Label(hero, textvariable=self.summary_var, style="HeroStat.TLabel").grid(
@@ -293,33 +695,33 @@ class ProductManagerFrame(ttk.Frame):
         form_card.grid(row=1, column=0, sticky="nsew", padx=(0, 16))
         form_card.grid_columnconfigure(1, weight=1)
 
-        ttk.Label(form_card, text="New or Existing Product", style="SectionTitle.TLabel").grid(
+        ttk.Label(form_card, textvariable=self.form_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, columnspan=2, sticky="w"
         )
         ttk.Separator(form_card).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 16))
 
-        ttk.Label(form_card, text="Product ID", style="FieldLabel.TLabel").grid(
+        ttk.Label(form_card, textvariable=self.product_id_label_var, style="FieldLabel.TLabel").grid(
             row=2, column=0, sticky="w"
         )
         ttk.Entry(form_card, textvariable=self.product_id_var).grid(
             row=2, column=1, sticky="ew", pady=(0, 12)
         )
 
-        ttk.Label(form_card, text="Name", style="FieldLabel.TLabel").grid(
+        ttk.Label(form_card, textvariable=self.name_label_var, style="FieldLabel.TLabel").grid(
             row=3, column=0, sticky="w"
         )
         ttk.Entry(form_card, textvariable=self.name_var).grid(
             row=3, column=1, sticky="ew", pady=(0, 12)
         )
 
-        ttk.Label(form_card, text="Price", style="FieldLabel.TLabel").grid(
+        ttk.Label(form_card, textvariable=self.price_label_var, style="FieldLabel.TLabel").grid(
             row=4, column=0, sticky="w"
         )
         ttk.Entry(form_card, textvariable=self.price_var).grid(
             row=4, column=1, sticky="ew", pady=(0, 12)
         )
 
-        ttk.Label(form_card, text="Stock", style="FieldLabel.TLabel").grid(
+        ttk.Label(form_card, textvariable=self.stock_label_var, style="FieldLabel.TLabel").grid(
             row=5, column=0, sticky="w"
         )
         ttk.Entry(form_card, textvariable=self.stock_var).grid(
@@ -328,32 +730,30 @@ class ProductManagerFrame(ttk.Frame):
 
         actions = ttk.Frame(form_card, style="Card.TFrame")
         actions.grid(row=6, column=0, columnspan=2, sticky="ew")
-        actions.grid_columnconfigure(0, weight=1)
-        actions.grid_columnconfigure(1, weight=1)
-        actions.grid_columnconfigure(2, weight=1)
-        actions.grid_columnconfigure(3, weight=1)
+        for index in range(4):
+            actions.grid_columnconfigure(index, weight=1)
 
         ttk.Button(
             actions,
-            text="Add Product",
+            textvariable=self.add_button_text,
             command=self.add_product,
             style="Accent.TButton",
         ).grid(row=0, column=0, sticky="ew", padx=(0, 12))
         ttk.Button(
             actions,
-            text="Update",
+            textvariable=self.update_button_text,
             command=self.update_product,
             style="Secondary.TButton",
         ).grid(row=0, column=1, sticky="ew", padx=(0, 12))
         ttk.Button(
             actions,
-            text="Clear",
+            textvariable=self.clear_button_text,
             command=self.clear_form,
             style="Secondary.TButton",
         ).grid(row=0, column=2, sticky="ew", padx=(0, 12))
         ttk.Button(
             actions,
-            text="Refresh",
+            textvariable=self.refresh_button_text,
             command=self.refresh_products,
             style="Secondary.TButton",
         ).grid(row=0, column=3, sticky="ew")
@@ -363,7 +763,7 @@ class ProductManagerFrame(ttk.Frame):
         inventory_card.grid_rowconfigure(1, weight=1)
         inventory_card.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(inventory_card, text="Inventory", style="SectionTitle.TLabel").grid(
+        ttk.Label(inventory_card, textvariable=self.inventory_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Separator(inventory_card).grid(row=1, column=0, sticky="ew", pady=(8, 16))
@@ -375,11 +775,10 @@ class ProductManagerFrame(ttk.Frame):
             show="headings",
             height=10,
         )
-        for col in columns:
-            self.tree.heading(col, text=col.replace("_", " ").title())
-            anchor = tk.CENTER if col != "name" else tk.W
-            width = 120 if col != "name" else 220
-            self.tree.column(col, width=width, anchor=anchor)
+        for column in columns:
+            anchor = tk.CENTER if column != "name" else tk.W
+            width = 120 if column != "name" else 220
+            self.tree.column(column, width=width, anchor=anchor)
         self.tree.configure(selectmode="browse")
         self.tree.grid(row=2, column=0, sticky="nsew")
 
@@ -392,14 +791,43 @@ class ProductManagerFrame(ttk.Frame):
 
         self.tree.bind("<Double-1>", self._on_tree_select)
 
-    def _on_tree_select(self, event) -> None:
+    def apply_settings(self) -> None:
+        self.hero_title_var.set(self.app.t("inventory.hero.title"))
+        self.hero_subtitle_var.set(self.app.t("inventory.hero.subtitle"))
+        self.form_title_var.set(self.app.t("inventory.card.form.title"))
+        self.product_id_label_var.set(self.app.t("field.product_id"))
+        self.name_label_var.set(self.app.t("field.name"))
+        self.price_label_var.set(self.app.t("field.price"))
+        self.stock_label_var.set(self.app.t("field.stock"))
+        self.add_button_text.set(self.app.t("action.add_product"))
+        self.update_button_text.set(self.app.t("action.update_product"))
+        self.clear_button_text.set(self.app.t("action.clear"))
+        self.refresh_button_text.set(self.app.t("action.refresh"))
+        self.inventory_title_var.set(self.app.t("inventory.card.list.title"))
+
+        headings = {
+            "product_id": self.app.t("field.product_id"),
+            "name": self.app.t("inventory.table.product"),
+            "price": self.app.t("inventory.table.price"),
+            "stock": self.app.t("inventory.table.stock"),
+        }
+        for column, label in headings.items():
+            self.tree.heading(column, text=label)
+
+        self.summary_var.set(self.app.t("inventory.hero.empty"))
+
+    def _strip_currency(self, value: str) -> str:
+        cleaned = ''.join(ch for ch in value if ch.isdigit() or ch in {'.', ',', '-'})
+        return cleaned.replace(',', '')
+
+    def _on_tree_select(self, _event) -> None:
         selected_item = self.tree.selection()
         if not selected_item:
             return
         item_values = self.tree.item(selected_item[0], "values")
         self.product_id_var.set(item_values[0])
         self.name_var.set(item_values[1])
-        self.price_var.set(item_values[2])
+        self.price_var.set(self._strip_currency(str(item_values[2])))
         self.stock_var.set(item_values[3])
 
     def _parse_product_from_form(self) -> Product:
@@ -410,13 +838,13 @@ class ProductManagerFrame(ttk.Frame):
             price = float(self.price_var.get())
             stock = int(self.stock_var.get())
         except ValueError as exc:
-            raise ValueError("Price must be a number and stock must be an integer") from exc
+            raise ValueError(self.app.t("inventory.error.invalid")) from exc
 
         if price < 0 or stock < 0:
-            raise ValueError("Price and stock must be non-negative")
+            raise ValueError(self.app.t("inventory.error.negative"))
 
         if not product_id or not name:
-            raise ValueError("Product ID and name are required")
+            raise ValueError(self.app.t("inventory.error.required"))
 
         return Product(product_id=product_id, name=name, price=price, stock=stock)
 
@@ -424,25 +852,32 @@ class ProductManagerFrame(ttk.Frame):
         try:
             product = self._parse_product_from_form()
             self.db.add_product(product)
-            messagebox.showinfo("Success", "Product added successfully")
+            messagebox.showinfo(self.app.t("dialog.success"), self.app.t("inventory.success.add"))
             self.refresh_products()
             self.clear_form()
-            self.on_inventory_change()
+            if self.on_inventory_change:
+                self.on_inventory_change()
         except sqlite3.IntegrityError:
-            messagebox.showerror("Error", "Product ID already exists")
+            messagebox.showerror(self.app.t("dialog.error"), self.app.t("inventory.error.duplicate"))
         except ValueError as exc:
-            messagebox.showerror("Error", str(exc))
+            messagebox.showerror(self.app.t("dialog.error"), str(exc))
 
     def update_product(self) -> None:
         try:
             product = self._parse_product_from_form()
             self.db.update_product(product)
-            messagebox.showinfo("Success", "Product updated successfully")
+            messagebox.showinfo(self.app.t("dialog.success"), self.app.t("inventory.success.update"))
             self.refresh_products()
             self.clear_form()
-            self.on_inventory_change()
+            if self.on_inventory_change:
+                self.on_inventory_change()
         except ValueError as exc:
-            messagebox.showerror("Error", str(exc))
+            messagebox.showerror(self.app.t("dialog.error"), str(exc))
+        except sqlite3.DatabaseError as exc:  # pragma: no cover - sqlite error propagation
+            messagebox.showerror(
+                self.app.t("dialog.error"),
+                self.app.t("inventory.error.database", error=exc),
+            )
 
     def clear_form(self) -> None:
         self.product_id_var.set("")
@@ -455,27 +890,31 @@ class ProductManagerFrame(ttk.Frame):
             self.tree.delete(item)
 
         products = self.db.list_products()
+        total_value = 0.0
         for index, product in enumerate(products):
+            total_value += product.price * product.stock
             tag = "evenrow" if index % 2 == 0 else "oddrow"
             self.tree.insert(
                 "",
                 tk.END,
-                values=(product.product_id, product.name, f"{product.price:.2f}", product.stock),
+                values=(
+                    product.product_id,
+                    product.name,
+                    self.app.format_money(product.price),
+                    product.stock,
+                ),
                 tags=(tag,),
             )
 
         if products:
-            total_stock = sum(product.stock for product in products)
-            total_value = sum(product.stock * product.price for product in products)
-            summary = (
-                f"{len(products)} products • {total_stock} units available • "
-                f"Inventory value ${total_value:.2f}"
+            summary = self.app.t(
+                "inventory.hero.summary",
+                count=len(products),
+                value=self.app.format_money(total_value),
             )
         else:
-            summary = "No products in inventory yet. Add your first item to get started."
+            summary = self.app.t("inventory.hero.empty")
         self.summary_var.set(summary)
-
-
 class SalesFrame(ttk.Frame):
     """GUI for handling the sales process."""
 
@@ -485,20 +924,38 @@ class SalesFrame(ttk.Frame):
         db: DatabaseManager,
         inventory_provider,
         on_sale_complete,
+        app: "POSApp",
     ) -> None:
         super().__init__(parent, padding=20, style="Background.TFrame")
         self.db = db
         self.inventory_provider = inventory_provider
         self.on_sale_complete = on_sale_complete
+        self.app = app
         self.cart: Dict[str, Dict[str, float]] = {}
+        self.inventory_cache: Dict[str, Product] = {}
         self.last_sale: Optional[SaleRecord] = None
-        self.cart_summary_var = tk.StringVar(value="Cart is empty.")
-        self.status_var = tk.StringVar(value="Ready to build a cart.")
 
+        self.cart_summary_var = tk.StringVar()
+        self.status_var = tk.StringVar()
         self.product_id_var = tk.StringVar()
         self.quantity_var = tk.StringVar(value="1")
-        self.subtotal_var = tk.StringVar(value="0.00")
-        self.total_var = tk.StringVar(value="0.00")
+        self.subtotal_var = tk.StringVar()
+        self.total_var = tk.StringVar()
+
+        self.hero_title_var = tk.StringVar()
+        self.hero_subtitle_var = tk.StringVar()
+        self.quick_add_title_var = tk.StringVar()
+        self.product_id_label_var = tk.StringVar()
+        self.quantity_label_var = tk.StringVar()
+        self.add_to_cart_text = tk.StringVar()
+        self.remove_selected_text = tk.StringVar()
+        self.clear_cart_text = tk.StringVar()
+        self.summary_title_var = tk.StringVar()
+        self.subtotal_label_var = tk.StringVar()
+        self.balance_label_var = tk.StringVar()
+        self.finalize_button_text = tk.StringVar()
+        self.print_button_text = tk.StringVar()
+        self.cart_title_var = tk.StringVar()
 
         self.container = ttk.Frame(self, style="Background.TFrame")
         self.container.grid(row=0, column=0, sticky="nsew")
@@ -508,7 +965,9 @@ class SalesFrame(ttk.Frame):
         self.container.grid_rowconfigure(1, weight=1)
 
         self._build_ui()
+        self.apply_settings()
         self._refresh_inventory_cache()
+        self._update_totals()
 
     def _build_ui(self) -> None:
         container = self.container
@@ -517,12 +976,12 @@ class SalesFrame(ttk.Frame):
         hero.grid(row=0, column=0, sticky="ew", pady=(0, 24))
         hero.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(hero, text="Sales Checkout", style="HeroTitle.TLabel").grid(
+        ttk.Label(hero, textvariable=self.hero_title_var, style="HeroTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Label(
             hero,
-            text="Scan items into the cart, monitor totals, and wrap receipts instantly.",
+            textvariable=self.hero_subtitle_var,
             style="HeroSubtitle.TLabel",
         ).grid(row=1, column=0, sticky="w", pady=(4, 0))
         ttk.Label(hero, textvariable=self.cart_summary_var, style="HeroStat.TLabel").grid(
@@ -539,19 +998,19 @@ class SalesFrame(ttk.Frame):
         scanner_card.grid(row=0, column=0, sticky="nsew", padx=(0, 16))
         scanner_card.grid_columnconfigure(1, weight=1)
 
-        ttk.Label(scanner_card, text="Quick Add", style="SectionTitle.TLabel").grid(
+        ttk.Label(scanner_card, textvariable=self.quick_add_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, columnspan=2, sticky="w"
         )
         ttk.Separator(scanner_card).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 16))
 
-        ttk.Label(scanner_card, text="Product ID", style="FieldLabel.TLabel").grid(
+        ttk.Label(scanner_card, textvariable=self.product_id_label_var, style="FieldLabel.TLabel").grid(
             row=2, column=0, sticky="w"
         )
         ttk.Entry(scanner_card, textvariable=self.product_id_var).grid(
             row=2, column=1, sticky="ew", pady=(0, 12)
         )
 
-        ttk.Label(scanner_card, text="Quantity", style="FieldLabel.TLabel").grid(
+        ttk.Label(scanner_card, textvariable=self.quantity_label_var, style="FieldLabel.TLabel").grid(
             row=3, column=0, sticky="w"
         )
         ttk.Entry(scanner_card, textvariable=self.quantity_var).grid(
@@ -560,7 +1019,7 @@ class SalesFrame(ttk.Frame):
 
         ttk.Button(
             scanner_card,
-            text="Add to Cart",
+            textvariable=self.add_to_cart_text,
             command=self.add_to_cart,
             style="Accent.TButton",
         ).grid(row=4, column=0, columnspan=2, sticky="ew")
@@ -572,13 +1031,13 @@ class SalesFrame(ttk.Frame):
 
         ttk.Button(
             secondary_actions,
-            text="Remove Selected",
+            textvariable=self.remove_selected_text,
             command=self.remove_selected_item,
             style="Secondary.TButton",
         ).grid(row=0, column=0, sticky="ew", padx=(0, 12))
         ttk.Button(
             secondary_actions,
-            text="Clear Cart",
+            textvariable=self.clear_cart_text,
             command=self.clear_cart,
             style="Secondary.TButton",
         ).grid(row=0, column=1, sticky="ew")
@@ -587,19 +1046,19 @@ class SalesFrame(ttk.Frame):
         totals_card.grid(row=0, column=1, sticky="nsew")
         totals_card.grid_columnconfigure(1, weight=1)
 
-        ttk.Label(totals_card, text="Checkout Summary", style="SectionTitle.TLabel").grid(
+        ttk.Label(totals_card, textvariable=self.summary_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, columnspan=2, sticky="w"
         )
         ttk.Separator(totals_card).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 16))
 
-        ttk.Label(totals_card, text="Subtotal", style="FieldLabel.TLabel").grid(
+        ttk.Label(totals_card, textvariable=self.subtotal_label_var, style="FieldLabel.TLabel").grid(
             row=2, column=0, sticky="w"
         )
         ttk.Label(totals_card, textvariable=self.subtotal_var, style="TotalsValue.TLabel").grid(
             row=2, column=1, sticky=tk.E
         )
 
-        ttk.Label(totals_card, text="Balance Due", style="FieldLabel.TLabel").grid(
+        ttk.Label(totals_card, textvariable=self.balance_label_var, style="FieldLabel.TLabel").grid(
             row=3, column=0, sticky="w"
         )
         ttk.Label(totals_card, textvariable=self.total_var, style="TotalsValueAccent.TLabel").grid(
@@ -608,14 +1067,14 @@ class SalesFrame(ttk.Frame):
 
         ttk.Button(
             totals_card,
-            text="Finalize Sale",
+            textvariable=self.finalize_button_text,
             command=self.finalize_sale,
             style="Accent.TButton",
         ).grid(row=4, column=0, columnspan=2, sticky="ew", pady=(16, 8))
 
         self.print_button = ttk.Button(
             totals_card,
-            text="Print Invoice",
+            textvariable=self.print_button_text,
             command=self.print_invoice,
             style="Secondary.TButton",
         )
@@ -627,20 +1086,19 @@ class SalesFrame(ttk.Frame):
         cart_card.grid_rowconfigure(2, weight=1)
         cart_card.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(cart_card, text="Active Cart", style="SectionTitle.TLabel").grid(
+        ttk.Label(cart_card, textvariable=self.cart_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Separator(cart_card).grid(row=1, column=0, sticky="ew", pady=(8, 16))
 
         columns = ("product_id", "name", "price", "quantity", "line_total")
         self.tree = ttk.Treeview(cart_card, columns=columns, show="headings", height=10)
-        for col in columns:
-            self.tree.heading(col, text=col.replace("_", " ").title())
-            anchor = tk.CENTER if col != "name" else tk.W
-            width = 110 if col not in {"name", "line_total"} else 150
-            if col == "name":
+        for column in columns:
+            anchor = tk.CENTER if column not in {"name", "line_total"} else tk.W
+            width = 110 if column not in {"name", "line_total"} else 150
+            if column == "name":
                 width = 240
-            self.tree.column(col, anchor=anchor, width=width)
+            self.tree.column(column, anchor=anchor, width=width)
         self.tree.configure(selectmode="browse")
         self.tree.grid(row=2, column=0, sticky="nsew")
 
@@ -655,6 +1113,36 @@ class SalesFrame(ttk.Frame):
 
         self.status_label = ttk.Label(container, textvariable=self.status_var, style="Status.TLabel")
         self.status_label.grid(row=2, column=0, sticky="w", pady=(24, 0))
+
+    def apply_settings(self) -> None:
+        self.hero_title_var.set(self.app.t("sales.hero.title"))
+        self.hero_subtitle_var.set(self.app.t("sales.hero.subtitle"))
+        self.quick_add_title_var.set(self.app.t("sales.quick_add"))
+        self.product_id_label_var.set(self.app.t("field.product_id"))
+        self.quantity_label_var.set(self.app.t("field.quantity"))
+        self.add_to_cart_text.set(self.app.t("action.add_to_cart"))
+        self.remove_selected_text.set(self.app.t("action.remove_selected"))
+        self.clear_cart_text.set(self.app.t("action.clear_cart"))
+        self.summary_title_var.set(self.app.t("sales.summary.title"))
+        self.subtotal_label_var.set(self.app.t("label.subtotal"))
+        self.balance_label_var.set(self.app.t("label.balance_due"))
+        self.finalize_button_text.set(self.app.t("action.finalize_sale"))
+        self.print_button_text.set(self.app.t("action.print_invoice"))
+        self.cart_title_var.set(self.app.t("sales.cart.title"))
+
+        headings = {
+            "product_id": self.app.t("sales.cart.heading.product_id"),
+            "name": self.app.t("sales.cart.heading.name"),
+            "price": self.app.t("sales.cart.heading.price"),
+            "quantity": self.app.t("sales.cart.heading.quantity"),
+            "line_total": self.app.t("sales.cart.heading.total"),
+        }
+        for column, text in headings.items():
+            self.tree.heading(column, text=text)
+
+        self._populate_cart_tree()
+        self._update_totals()
+        self.status_var.set(self.app.t("sales.status.prompt"))
 
     def _refresh_inventory_cache(self) -> None:
         self.inventory_cache = {product.product_id: product for product in self.inventory_provider()}
@@ -671,35 +1159,47 @@ class SalesFrame(ttk.Frame):
             if quantity <= 0:
                 raise ValueError
         except ValueError:
-            messagebox.showerror("Invalid quantity", "Quantity must be a positive integer")
-            self._set_status("Quantity must be a positive integer.")
+            messagebox.showerror(
+                self.app.t("sales.dialog.invalid_quantity"),
+                self.app.t("sales.error.quantity"),
+            )
+            self._set_status(self.app.t("sales.error.quantity"))
             return
 
         if product_id not in self.inventory_cache:
-            messagebox.showerror("Not found", "Product ID not found in inventory")
-            self._set_status("Product ID not found in inventory.")
+            messagebox.showerror(self.app.t("dialog.error"), self.app.t("sales.status.not_found"))
+            self._set_status(self.app.t("sales.status.not_found"))
             return
 
         product = self.inventory_cache[product_id]
         if quantity > product.stock:
             messagebox.showerror(
-                "Insufficient stock",
-                f"Only {product.stock} units available for {product.name}",
+                self.app.t("sales.dialog.stock"),
+                self.app.t("sales.error.insufficient_stock", stock=product.stock, name=product.name),
             )
-            self._set_status(f"Only {product.stock} units of {product.name} available.")
+            self._set_status(
+                self.app.t("sales.status.stock", stock=product.stock, name=product.name)
+            )
             return
 
         if product_id in self.cart:
             new_qty = self.cart[product_id]["quantity"] + quantity
             if new_qty > product.stock:
                 messagebox.showerror(
-                    "Insufficient stock",
-                    f"Adding exceeds available stock ({product.stock}) for {product.name}",
+                    self.app.t("sales.dialog.stock"),
+                    self.app.t("sales.error.insufficient_stock", stock=product.stock, name=product.name),
                 )
-                self._set_status(f"Stock limit reached for {product.name}.")
+                self._set_status(
+                    self.app.t("sales.status.stock", stock=product.stock, name=product.name)
+                )
                 return
             self.cart[product_id]["quantity"] = new_qty
             self.cart[product_id]["line_total"] = new_qty * product.price
+            status_message = self.app.t(
+                "sales.status.updated",
+                name=product.name,
+                quantity=new_qty,
+            )
         else:
             self.cart[product_id] = {
                 "name": product.name,
@@ -707,10 +1207,15 @@ class SalesFrame(ttk.Frame):
                 "quantity": quantity,
                 "line_total": quantity * product.price,
             }
+            status_message = self.app.t(
+                "sales.status.added",
+                name=product.name,
+                quantity=quantity,
+            )
 
         self._populate_cart_tree()
         self._update_totals()
-        self._set_status(f"Added {quantity} × {product.name} to cart.", accent=True)
+        self._set_status(status_message, accent=True)
         self.product_id_var.set("")
         self.quantity_var.set("1")
 
@@ -725,9 +1230,9 @@ class SalesFrame(ttk.Frame):
                 values=(
                     product_id,
                     data["name"],
-                    f"{data['price']:.2f}",
+                    self.app.format_money(data["price"]),
                     data["quantity"],
-                    f"{data['line_total']:.2f}",
+                    self.app.format_money(data["line_total"]),
                 ),
                 tags=(tag,),
             )
@@ -735,27 +1240,36 @@ class SalesFrame(ttk.Frame):
     def _update_totals(self) -> None:
         subtotal = sum(item["line_total"] for item in self.cart.values())
         total = subtotal
-        self.subtotal_var.set(f"{subtotal:.2f}")
-        self.total_var.set(f"{total:.2f}")
+        self.subtotal_var.set(self.app.format_money(subtotal))
+        self.total_var.set(self.app.format_money(total))
 
         if self.cart:
             item_count = sum(item["quantity"] for item in self.cart.values())
-            label = "item" if item_count == 1 else "items"
-            self.cart_summary_var.set(f"{item_count} {label} • ${total:.2f}")
+            label_key = "sales.hero.item" if item_count == 1 else "sales.hero.items"
+            summary = self.app.t(
+                "sales.hero.summary",
+                count=item_count,
+                label=self.app.t(label_key),
+                total=self.app.format_money(total),
+            )
+            self.cart_summary_var.set(summary)
         else:
-            self.cart_summary_var.set("Cart is empty.")
+            self.cart_summary_var.set(self.app.t("sales.hero.empty"))
+            self.subtotal_var.set(self.app.format_money(0.0))
+            self.total_var.set(self.app.format_money(0.0))
 
     def clear_cart(self, notify: bool = True) -> None:
         self.cart.clear()
         self._populate_cart_tree()
         self._update_totals()
         if notify:
-            self._set_status("Cart cleared.")
+            self._set_status(self.app.t("sales.status.cleared"))
+        self.print_button.state(["disabled"])
 
     def remove_selected_item(self) -> None:
         selection = self.tree.selection()
         if not selection:
-            self._set_status("Select an item to remove from the cart.")
+            self._set_status(self.app.t("sales.status.select_item"))
             return
         product_id = self.tree.item(selection[0], "values")[0]
         if product_id in self.cart:
@@ -763,32 +1277,36 @@ class SalesFrame(ttk.Frame):
             del self.cart[product_id]
             self._populate_cart_tree()
             self._update_totals()
-            self._set_status(f"Removed {removed_name} from the cart.")
+            self._set_status(self.app.t("sales.status.removed", name=removed_name))
         else:
-            self._set_status("Selected item could not be found.")
+            self._set_status(self.app.t("sales.status.not_found"))
 
     def finalize_sale(self) -> None:
         if not self.cart:
-            messagebox.showwarning("Empty cart", "No items in cart to finalize")
-            self._set_status("Add items to the cart before finalizing.")
+            messagebox.showwarning(
+                self.app.t("sales.dialog.empty"),
+                self.app.t("sales.warning.empty"),
+            )
+            self._set_status(self.app.t("sales.warning.add_items"))
             return
 
-        # Refresh inventory to ensure latest stock counts
         self._refresh_inventory_cache()
 
-        # Validate stock availability before committing
         for product_id, item in self.cart.items():
             product = self.inventory_cache.get(product_id)
             if product is None:
-                messagebox.showerror("Error", f"Product {product_id} no longer exists")
-                self._set_status(f"Product {product_id} no longer exists.")
+                message = self.app.t("sales.status.no_longer_exists", product_id=product_id)
+                messagebox.showerror(self.app.t("dialog.error"), message)
+                self._set_status(message)
                 return
             if item["quantity"] > product.stock:
                 messagebox.showerror(
-                    "Insufficient stock",
-                    f"Only {product.stock} units available for {product.name}",
+                    self.app.t("sales.dialog.stock"),
+                    self.app.t("sales.error.insufficient_stock", stock=product.stock, name=product.name),
                 )
-                self._set_status(f"Only {product.stock} units of {product.name} remaining.")
+                self._set_status(
+                    self.app.t("sales.status.stock", stock=product.stock, name=product.name)
+                )
                 return
 
         subtotal = sum(item["line_total"] for item in self.cart.values())
@@ -805,9 +1323,8 @@ class SalesFrame(ttk.Frame):
             for product_id, item in self.cart.items()
         ]
 
-        # Update stock and log sale in a transaction
         try:
-            with self.db._get_connection() as conn:  # using private method for transaction control
+            with self.db._get_connection() as conn:
                 cursor = conn.cursor()
                 for product_id, item in self.cart.items():
                     product = self.inventory_cache[product_id]
@@ -832,8 +1349,11 @@ class SalesFrame(ttk.Frame):
                 sale_id = cursor.lastrowid
                 conn.commit()
         except sqlite3.DatabaseError as exc:
-            messagebox.showerror("Database error", f"Failed to finalize sale: {exc}")
-            self._set_status("Failed to finalize sale. Please try again.")
+            messagebox.showerror(
+                self.app.t("dialog.error"),
+                self.app.t("sales.error.database", error=exc),
+            )
+            self._set_status(self.app.t("sales.error.generic"))
             return
 
         sale_record = SaleRecord(
@@ -847,11 +1367,15 @@ class SalesFrame(ttk.Frame):
         self.last_sale = sale_record
         self.print_button.state(["!disabled"])
 
-        messagebox.showinfo("Sale complete", f"Total charged: ${total:.2f}")
+        messagebox.showinfo(
+            self.app.t("dialog.success"),
+            self.app.t("sales.success.total", total=self.app.format_money(total)),
+        )
         self.clear_cart(notify=False)
         self._refresh_inventory_cache()
+        timestamp = datetime.now().strftime('%I:%M:%S %p').lstrip('0')
         self._set_status(
-            f"Sale completed at {datetime.now().strftime('%I:%M:%S %p').lstrip('0')} • Invoice ready to print.",
+            self.app.t("sales.status.ready", timestamp=timestamp),
             accent=True,
         )
 
@@ -863,20 +1387,29 @@ class SalesFrame(ttk.Frame):
 
     def print_invoice(self) -> None:
         if not self.last_sale:
-            messagebox.showinfo("No invoice", "Complete a sale to print an invoice.")
+            messagebox.showinfo(
+                self.app.t("sales.invoice.none.title"),
+                self.app.t("sales.invoice.none.message"),
+            )
             return
 
-        InvoicePreview(self, format_invoice(self.last_sale))
-
-
+        InvoicePreview(self, self.app, format_invoice(self.last_sale, self.app))
 class PurchaseHistoryFrame(ttk.Frame):
     """GUI for reviewing and exporting past sales."""
 
-    def __init__(self, parent: tk.Widget, db: DatabaseManager) -> None:
+    def __init__(self, parent: tk.Widget, db: DatabaseManager, app: "POSApp") -> None:
         super().__init__(parent, padding=20, style="Background.TFrame")
         self.db = db
+        self.app = app
         self.sales: List[SaleRecord] = []
-        self.summary_var = tk.StringVar(value="No purchases recorded yet.")
+        self.summary_var = tk.StringVar()
+
+        self.hero_title_var = tk.StringVar()
+        self.hero_subtitle_var = tk.StringVar()
+        self.history_title_var = tk.StringVar()
+        self.refresh_text_var = tk.StringVar()
+        self.details_title_var = tk.StringVar()
+        self.open_invoice_text = tk.StringVar()
 
         self.container = ttk.Frame(self, style="Background.TFrame")
         self.container.grid(row=0, column=0, sticky="nsew")
@@ -886,6 +1419,7 @@ class PurchaseHistoryFrame(ttk.Frame):
         self.container.grid_columnconfigure(0, weight=1)
 
         self._build_ui()
+        self.apply_settings()
         self.refresh_history()
 
     def _build_ui(self) -> None:
@@ -895,12 +1429,12 @@ class PurchaseHistoryFrame(ttk.Frame):
         hero.grid(row=0, column=0, sticky="ew", pady=(0, 24))
         hero.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(hero, text="Purchase History", style="HeroTitle.TLabel").grid(
+        ttk.Label(hero, textvariable=self.hero_title_var, style="HeroTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Label(
             hero,
-            text="Browse previous receipts, revisit totals, and reprint invoices on demand.",
+            textvariable=self.hero_subtitle_var,
             style="HeroSubtitle.TLabel",
         ).grid(row=1, column=0, sticky="w", pady=(4, 0))
         ttk.Label(hero, textvariable=self.summary_var, style="HeroStat.TLabel").grid(
@@ -922,12 +1456,12 @@ class PurchaseHistoryFrame(ttk.Frame):
         header.grid(row=0, column=0, sticky="ew")
         header.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(header, text="Recent Sales", style="SectionTitle.TLabel").grid(
+        ttk.Label(header, textvariable=self.history_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Button(
             header,
-            text="Refresh",
+            textvariable=self.refresh_text_var,
             command=self.refresh_history,
             style="Secondary.TButton",
         ).grid(row=0, column=1, sticky="e")
@@ -936,22 +1470,14 @@ class PurchaseHistoryFrame(ttk.Frame):
 
         columns = ("sale_id", "timestamp", "items", "subtotal", "total")
         self.tree = ttk.Treeview(history_card, columns=columns, show="headings", height=12)
-        headings = {
-            "sale_id": "Sale #",
-            "timestamp": "Completed",
-            "items": "Items",
-            "subtotal": "Subtotal",
-            "total": "Total",
-        }
         widths = {
             "sale_id": 80,
             "timestamp": 160,
             "items": 80,
-            "subtotal": 100,
-            "total": 100,
+            "subtotal": 120,
+            "total": 120,
         }
         for column in columns:
-            self.tree.heading(column, text=headings[column])
             anchor = tk.CENTER if column != "timestamp" else tk.W
             self.tree.column(column, width=widths[column], anchor=anchor)
         self.tree.grid(row=2, column=0, sticky="nsew")
@@ -969,7 +1495,7 @@ class PurchaseHistoryFrame(ttk.Frame):
         details_card.grid_rowconfigure(2, weight=1)
         details_card.grid_columnconfigure(0, weight=1)
 
-        ttk.Label(details_card, text="Sale Details", style="SectionTitle.TLabel").grid(
+        ttk.Label(details_card, textvariable=self.details_title_var, style="SectionTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Separator(details_card).grid(row=1, column=0, sticky="ew", pady=(8, 16))
@@ -993,12 +1519,31 @@ class PurchaseHistoryFrame(ttk.Frame):
 
         self.view_button = ttk.Button(
             details_card,
-            text="Open Invoice",
+            textvariable=self.open_invoice_text,
             command=self.open_invoice,
             style="Secondary.TButton",
         )
         self.view_button.grid(row=3, column=0, sticky="ew", pady=(16, 0))
         self.view_button.state(["disabled"])
+
+    def apply_settings(self) -> None:
+        self.hero_title_var.set(self.app.t("history.hero.title"))
+        self.hero_subtitle_var.set(self.app.t("history.hero.subtitle"))
+        self.history_title_var.set(self.app.t("history.card.title"))
+        self.refresh_text_var.set(self.app.t("history.refresh"))
+        self.details_title_var.set(self.app.t("history.details.title"))
+        self.open_invoice_text.set(self.app.t("history.action.open"))
+        self.summary_var.set(self.app.t("history.hero.empty"))
+
+        headings = {
+            "sale_id": self.app.t("history.table.sale_id"),
+            "timestamp": self.app.t("history.table.timestamp"),
+            "items": self.app.t("history.table.items"),
+            "subtotal": self.app.t("history.table.subtotal"),
+            "total": self.app.t("history.table.total"),
+        }
+        for column, text in headings.items():
+            self.tree.heading(column, text=text)
 
     def refresh_history(self) -> None:
         self.sales = self.db.list_sales()
@@ -1016,18 +1561,20 @@ class PurchaseHistoryFrame(ttk.Frame):
                     sale.sale_id,
                     sale.timestamp.strftime("%Y-%m-%d %H:%M"),
                     sum(item["quantity"] for item in sale.items),
-                    f"{sale.subtotal:.2f}",
-                    f"{sale.total:.2f}",
+                    self.app.format_money(sale.subtotal),
+                    self.app.format_money(sale.total),
                 ),
                 tags=(tag,),
             )
 
         if self.sales:
-            summary = (
-                f"{len(self.sales)} sales • ${total_revenue:.2f} revenue captured"
+            summary = self.app.t(
+                "history.hero.summary",
+                count=len(self.sales),
+                revenue=self.app.format_money(total_revenue),
             )
         else:
-            summary = "No purchases recorded yet. Completed sales will appear here."
+            summary = self.app.t("history.hero.empty")
         self.summary_var.set(summary)
         self._update_details()
 
@@ -1047,23 +1594,33 @@ class PurchaseHistoryFrame(ttk.Frame):
             self.view_button.state(["disabled"])
             self.detail_text.configure(state="normal")
             self.detail_text.delete("1.0", tk.END)
-            self.detail_text.insert(tk.END, "Select a sale to see its details.")
+            self.detail_text.insert(tk.END, self.app.t("history.details.none"))
             self.detail_text.configure(state="disabled")
             return
 
         self.view_button.state(["!disabled"])
         details_lines = [
-            f"Sale #{sale.sale_id}",
+            f"{self.app.t('history.table.sale_id')} {sale.sale_id}",
             sale.timestamp.strftime("%B %d, %Y • %I:%M %p").lstrip("0").replace(" 0", " "),
             "",
         ]
         for item in sale.items:
             details_lines.append(
-                f"{item['quantity']} × {item['name']} (@ ${item['price']:.2f}) = ${item['line_total']:.2f}"
+                self.app.t(
+                    "history.details.line",
+                    quantity=item["quantity"],
+                    name=item["name"],
+                    price=self.app.format_money(item["price"]),
+                    total=self.app.format_money(item["line_total"]),
+                )
             )
         details_lines.append("")
-        details_lines.append(f"Subtotal: ${sale.subtotal:.2f}")
-        details_lines.append(f"Balance Due: ${sale.total:.2f}")
+        details_lines.append(
+            self.app.t("history.details.subtotal", value=self.app.format_money(sale.subtotal))
+        )
+        details_lines.append(
+            self.app.t("history.details.total", value=self.app.format_money(sale.total))
+        )
 
         self.detail_text.configure(state="normal")
         self.detail_text.delete("1.0", tk.END)
@@ -1073,23 +1630,31 @@ class PurchaseHistoryFrame(ttk.Frame):
     def open_invoice(self) -> None:
         sale = self._get_selected_sale()
         if sale is None:
-            messagebox.showinfo("No sale selected", "Select a sale to open its invoice.")
+            messagebox.showinfo(
+                self.app.t("history.info.none"),
+                self.app.t("history.info.select"),
+            )
             return
 
-        InvoicePreview(self, format_invoice(sale))
-
-
-def format_invoice(sale: SaleRecord) -> str:
+        InvoicePreview(self, self.app, format_invoice(sale, self.app))
+def format_invoice(sale: SaleRecord, app: "POSApp") -> str:
     """Create a printable invoice string from a sale."""
 
     header_width = 72
     lines = [
-        "POS System Invoice".center(header_width),
+        app.t("invoice.header").center(header_width),
         "=" * header_width,
-        f"Sale #: {sale.sale_id}",
-        f"Completed: {sale.timestamp.strftime('%Y-%m-%d %H:%M:%S')}",
+        f"{app.t('invoice.sale_number')} {sale.sale_id}",
+        f"{app.t('invoice.completed')} {sale.timestamp.strftime('%Y-%m-%d %H:%M:%S')}",
         "=" * header_width,
-        f"{'ID':<10}{'Product':<26}{'Qty':>5}{'Price':>16}{'Total':>15}",
+        app.t(
+            "invoice.columns",
+            id=app.t("invoice.column.id"),
+            name=app.t("invoice.column.product"),
+            qty=app.t("invoice.column.qty"),
+            price=app.t("invoice.column.price"),
+            total=app.t("invoice.column.total"),
+        ),
         "-" * header_width,
     ]
 
@@ -1099,8 +1664,8 @@ def format_invoice(sale: SaleRecord) -> str:
         quantity = int(item.get("quantity", 0))
         price = float(item.get("price", 0.0))
         line_total = float(item.get("line_total", quantity * price))
-        price_str = f"${price:.2f}"
-        total_str = f"${line_total:.2f}"
+        price_str = app.format_money(price)
+        total_str = app.format_money(line_total)
         lines.append(
             f"{str(item.get('product_id', '')):<10}"
             f"{display_name:<26}"
@@ -1110,22 +1675,21 @@ def format_invoice(sale: SaleRecord) -> str:
         )
 
     lines.append("-" * header_width)
-    subtotal_str = f"${sale.subtotal:.2f}"
-    total_str = f"${sale.total:.2f}"
-    lines.append(f"{'Subtotal:':>56}{subtotal_str:>16}")
-    lines.append(f"{'Balance Due:':>56}{total_str:>16}")
+    subtotal_str = app.format_money(sale.subtotal)
+    total_str = app.format_money(sale.total)
+    lines.append(f"{app.t('invoice.subtotal'):>56}{subtotal_str:>16}")
+    lines.append(f"{app.t('invoice.total'):>56}{total_str:>16}")
     lines.append("=" * header_width)
-    lines.append("Thank you for shopping with us!")
+    lines.append(app.t("invoice.footer"))
 
     return "\n".join(lines)
-
-
 class InvoicePreview(tk.Toplevel):
     """Preview window that supports saving or printing invoices."""
 
-    def __init__(self, parent: tk.Widget, invoice_text: str) -> None:
+    def __init__(self, parent: tk.Widget, app: "POSApp", invoice_text: str) -> None:
         super().__init__(parent)
-        self.title("Invoice Preview")
+        self.app = app
+        self.title(self.app.t("invoice.title"))
         self.configure(bg=PALETTE["bg"])
         self.invoice_text = invoice_text
 
@@ -1141,7 +1705,7 @@ class InvoicePreview(tk.Toplevel):
         container.grid_columnconfigure(0, weight=1)
         container.grid_rowconfigure(1, weight=1)
 
-        ttk.Label(container, text="Invoice Preview", style="SectionTitle.TLabel").grid(
+        ttk.Label(container, text=self.app.t("invoice.title"), style="SectionTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
 
@@ -1174,19 +1738,19 @@ class InvoicePreview(tk.Toplevel):
 
         ttk.Button(
             button_bar,
-            text="Save As…",
+            text=self.app.t("invoice.save"),
             command=self._save_invoice,
             style="Secondary.TButton",
         ).grid(row=0, column=0, sticky="ew", padx=(0, 12))
         ttk.Button(
             button_bar,
-            text="Print",
+            text=self.app.t("invoice.print"),
             command=self._send_to_printer,
             style="Accent.TButton",
         ).grid(row=0, column=1, sticky="ew", padx=(0, 12))
         ttk.Button(
             button_bar,
-            text="Close",
+            text=self.app.t("invoice.close"),
             command=self.destroy,
             style="Secondary.TButton",
         ).grid(row=0, column=2, sticky="ew")
@@ -1195,7 +1759,7 @@ class InvoicePreview(tk.Toplevel):
         file_path = filedialog.asksaveasfilename(
             defaultextension=".txt",
             filetypes=(("Text files", "*.txt"), ("All files", "*.*")),
-            title="Save invoice",
+            title=self.app.t("invoice.save.title"),
         )
         if not file_path:
             return
@@ -1204,10 +1768,16 @@ class InvoicePreview(tk.Toplevel):
             with open(file_path, "w", encoding="utf-8") as file:
                 file.write(self.invoice_text)
         except OSError as exc:
-            messagebox.showerror("Save failed", f"Could not save invoice: {exc}")
+            messagebox.showerror(
+                self.app.t("dialog.error"),
+                self.app.t("invoice.save.error", error=exc),
+            )
             return
 
-        messagebox.showinfo("Invoice saved", f"Invoice saved to {file_path}")
+        messagebox.showinfo(
+            self.app.t("dialog.success"),
+            self.app.t("invoice.save.success", path=file_path),
+        )
 
     def _send_to_printer(self) -> None:
         tmp_path: Optional[str] = None
@@ -1223,20 +1793,28 @@ class InvoicePreview(tk.Toplevel):
                 if hasattr(os, "startfile"):
                     os.startfile(tmp_path, "print")  # type: ignore[attr-defined]
                 else:
-                    raise RuntimeError("Printing is not supported on this Windows configuration.")
+                    raise RuntimeError(
+                        "Printing is not supported on this Windows configuration."
+                    )
             elif system in {"darwin", "linux"}:
                 subprocess.run(["lp", tmp_path], check=True)
             else:
                 raise RuntimeError("Printing is not supported on this platform.")
 
-            messagebox.showinfo("Invoice sent", "Invoice sent to the default printer.")
+            messagebox.showinfo(
+                self.app.t("dialog.success"),
+                self.app.t("invoice.print.sent"),
+            )
         except FileNotFoundError:
             messagebox.showerror(
-                "Print failed",
-                "The system printing utility was not found. Save the invoice and print manually.",
+                self.app.t("dialog.error"),
+                self.app.t("invoice.print.missing"),
             )
         except (OSError, subprocess.CalledProcessError, RuntimeError) as exc:
-            messagebox.showerror("Print failed", f"Could not print invoice: {exc}")
+            messagebox.showerror(
+                self.app.t("dialog.error"),
+                self.app.t("invoice.print.error", error=exc),
+            )
         finally:
             if tmp_path and os.path.exists(tmp_path):
                 try:
@@ -1245,12 +1823,138 @@ class InvoicePreview(tk.Toplevel):
                     pass
 
 
+class SettingsFrame(ttk.Frame):
+    """Preferences panel for language and currency."""
+
+    def __init__(self, parent: tk.Widget, app: "POSApp") -> None:
+        super().__init__(parent, padding=20, style="Background.TFrame")
+        self.app = app
+        self.language_var = tk.StringVar()
+        self.currency_var = tk.StringVar()
+        self.notice_var = tk.StringVar()
+
+        self.hero_title_var = tk.StringVar()
+        self.hero_subtitle_var = tk.StringVar()
+        self.language_label_var = tk.StringVar()
+        self.currency_label_var = tk.StringVar()
+        self.apply_button_text = tk.StringVar()
+
+        self.container = ttk.Frame(self, style="Background.TFrame")
+        self.container.grid(row=0, column=0, sticky="nsew")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+        self.container.grid_columnconfigure(0, weight=1)
+
+        self._build_ui()
+        self.apply_settings()
+
+    def _build_ui(self) -> None:
+        container = self.container
+
+        hero = ttk.Frame(container, style="Hero.TFrame", padding=(24, 18))
+        hero.grid(row=0, column=0, sticky="ew", pady=(0, 24))
+        hero.grid_columnconfigure(0, weight=1)
+
+        ttk.Label(hero, textvariable=self.hero_title_var, style="HeroTitle.TLabel").grid(
+            row=0, column=0, sticky="w"
+        )
+        ttk.Label(
+            hero,
+            textvariable=self.hero_subtitle_var,
+            style="HeroSubtitle.TLabel",
+        ).grid(row=1, column=0, sticky="w", pady=(4, 0))
+        ttk.Label(hero, textvariable=self.notice_var, style="HeroStat.TLabel").grid(
+            row=2, column=0, sticky="w", pady=(16, 0)
+        )
+
+        card = ttk.Frame(container, style="Card.TFrame", padding=24)
+        card.grid(row=1, column=0, sticky="nsew")
+        card.grid_columnconfigure(1, weight=1)
+
+        ttk.Label(card, textvariable=self.language_label_var, style="FieldLabel.TLabel").grid(
+            row=0, column=0, sticky="w"
+        )
+        self.language_combo = ttk.Combobox(
+            card,
+            textvariable=self.language_var,
+            state="readonly",
+            values=self._language_options(),
+        )
+        self.language_combo.grid(row=0, column=1, sticky="ew", pady=(0, 16))
+
+        ttk.Label(card, textvariable=self.currency_label_var, style="FieldLabel.TLabel").grid(
+            row=1, column=0, sticky="w"
+        )
+        self.currency_combo = ttk.Combobox(
+            card,
+            textvariable=self.currency_var,
+            state="readonly",
+            values=self._currency_options(),
+        )
+        self.currency_combo.grid(row=1, column=1, sticky="ew", pady=(0, 16))
+
+        ttk.Button(
+            card,
+            textvariable=self.apply_button_text,
+            command=self._apply,
+            style="Accent.TButton",
+        ).grid(row=2, column=0, columnspan=2, sticky="ew")
+
+    def _language_options(self) -> List[str]:
+        return [SUPPORTED_LANGUAGES[code]["name"] for code in SUPPORTED_LANGUAGES]
+
+    def _currency_options(self) -> List[str]:
+        return [get_currency_display(code) for code in SUPPORTED_CURRENCIES]
+
+    def apply_settings(self) -> None:
+        self.hero_title_var.set(self.app.t("settings.hero.title"))
+        self.hero_subtitle_var.set(self.app.t("settings.hero.subtitle"))
+        self.language_label_var.set(self.app.t("settings.language.label"))
+        self.currency_label_var.set(self.app.t("settings.currency.label"))
+        self.apply_button_text.set(self.app.t("settings.apply"))
+        self.notice_var.set(self.app.t("settings.notice"))
+
+        current_language = self.app.settings.get("language", DEFAULT_LANGUAGE)
+        current_currency = self.app.settings.get("currency", DEFAULT_CURRENCY)
+
+        self.language_combo["values"] = self._language_options()
+        self.currency_combo["values"] = self._currency_options()
+
+        language_name = SUPPORTED_LANGUAGES.get(current_language, SUPPORTED_LANGUAGES[DEFAULT_LANGUAGE])["name"]
+        currency_display = get_currency_display(current_currency)
+        self.language_var.set(language_name)
+        self.currency_var.set(currency_display)
+
+    def _apply(self) -> None:
+        language_selection = self.language_var.get()
+        currency_selection = self.currency_var.get()
+
+        language_code = next(
+            (code for code, data in SUPPORTED_LANGUAGES.items() if data["name"] == language_selection),
+            self.app.settings.get("language", DEFAULT_LANGUAGE),
+        )
+        currency_code = next(
+            (code for code in SUPPORTED_CURRENCIES if get_currency_display(code) == currency_selection),
+            self.app.settings.get("currency", DEFAULT_CURRENCY),
+        )
+
+        self.app.update_settings(language_code, currency_code)
+        self.notice_var.set(
+            self.app.t(
+                "settings.applied.status",
+                language=SUPPORTED_LANGUAGES[language_code]["name"],
+                currency=get_currency_display(currency_code),
+            )
+        )
 class POSApp(tk.Tk):
     """Main application window."""
 
     def __init__(self) -> None:
         super().__init__()
-        self.title("POS System")
+        self.db = DatabaseManager(DB_FILE)
+        self.settings = self.db.get_app_settings()
+
+        self.title(self.t("app.title"))
         self.geometry("1100x720")
         self.configure(bg=PALETTE["bg"])
         self.option_add("*Font", (FONT_FAMILY, 11))
@@ -1258,8 +1962,16 @@ class POSApp(tk.Tk):
         self.style = ttk.Style(self)
         self._configure_style()
 
-        self.db = DatabaseManager(DB_FILE)
         self._build_ui()
+        self.apply_settings()
+
+    def t(self, key: str, **kwargs: Any) -> str:
+        language = self.settings.get("language", DEFAULT_LANGUAGE)
+        return translate(language, key, **kwargs)
+
+    def format_money(self, amount: float) -> str:
+        currency = self.settings.get("currency", DEFAULT_CURRENCY)
+        return format_currency(amount, currency)
 
     def _configure_style(self) -> None:
         style = self.style
@@ -1390,33 +2102,70 @@ class POSApp(tk.Tk):
         )
 
     def _build_ui(self) -> None:
-        container = ttk.Notebook(self)
-        container.pack(fill=tk.BOTH, expand=True)
+        self.notebook = ttk.Notebook(self)
+        self.notebook.pack(fill=tk.BOTH, expand=True)
 
         self.product_manager = ProductManagerFrame(
-            container,
+            self.notebook,
             db=self.db,
             on_inventory_change=self._notify_inventory_change,
+            app=self,
         )
-        container.add(self.product_manager, text="Products")
+        self.notebook.add(self.product_manager, text=self.t("tab.products"))
 
         self.sales_frame = SalesFrame(
-            container,
+            self.notebook,
             db=self.db,
             inventory_provider=self.db.list_products,
             on_sale_complete=self._handle_sale_complete,
+            app=self,
         )
-        container.add(self.sales_frame, text="Sales")
+        self.notebook.add(self.sales_frame, text=self.t("tab.sales"))
 
-        self.history_frame = PurchaseHistoryFrame(container, db=self.db)
-        container.add(self.history_frame, text="History")
+        self.history_frame = PurchaseHistoryFrame(self.notebook, db=self.db, app=self)
+        self.notebook.add(self.history_frame, text=self.t("tab.history"))
+
+        self.settings_frame = SettingsFrame(self.notebook, app=self)
+        self.notebook.add(self.settings_frame, text=self.t("tab.settings"))
+
+    def apply_settings(self) -> None:
+        self.title(self.t("app.title"))
+        self.notebook.tab(self.product_manager, text=self.t("tab.products"))
+        self.notebook.tab(self.sales_frame, text=self.t("tab.sales"))
+        self.notebook.tab(self.history_frame, text=self.t("tab.history"))
+        self.notebook.tab(self.settings_frame, text=self.t("tab.settings"))
+
+        self.product_manager.apply_settings()
+        self.product_manager.refresh_products()
+
+        self.sales_frame.apply_settings()
+        self.sales_frame._refresh_inventory_cache()
+        self.sales_frame._populate_cart_tree()
+        self.sales_frame._update_totals()
+
+        self.history_frame.apply_settings()
+        self.history_frame.refresh_history()
+
+        self.settings_frame.apply_settings()
+
+    def update_settings(self, language: str, currency: str) -> None:
+        if language not in SUPPORTED_LANGUAGES:
+            language = DEFAULT_LANGUAGE
+        if currency not in SUPPORTED_CURRENCIES:
+            currency = DEFAULT_CURRENCY
+
+        self.settings["language"] = language
+        self.settings["currency"] = currency
+        self.db.update_app_settings(language, currency)
+        self.apply_settings()
 
     def _notify_inventory_change(self) -> None:
         self.sales_frame._refresh_inventory_cache()
+        self.sales_frame._populate_cart_tree()
+        self.sales_frame._update_totals()
 
     def _handle_sale_complete(self, _sale: SaleRecord) -> None:
         self.history_frame.refresh_history()
-
 
 def main() -> None:
     app = POSApp()
