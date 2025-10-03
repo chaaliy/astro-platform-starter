@@ -21,6 +21,7 @@ from typing import Any, Dict, List, Optional
 
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from tkinter import font as tkfont
 from tkinter import ttk
 
 
@@ -2128,6 +2129,8 @@ class POSApp(tk.Tk):
         if "clam" in style.theme_names():
             style.theme_use("clam")
 
+        self.nav_font = tkfont.Font(family=FONT_FAMILY, size=12, weight="bold")
+
         style.configure("TFrame", background=PALETTE["bg"])
         style.configure("Background.TFrame", background=PALETTE["bg"])
         style.configure("NavBar.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
@@ -2222,8 +2225,8 @@ class POSApp(tk.Tk):
             "Nav.TMenubutton",
             background=PALETTE["primary"],
             foreground="#ffffff",
-            font=(FONT_FAMILY, 13, "bold"),
-            padding=(24, 14),
+            font=self.nav_font,
+            padding=(18, 12),
             relief="flat",
         )
         style.map(
@@ -2266,7 +2269,8 @@ class POSApp(tk.Tk):
 
         self.navbar = ttk.Frame(self.container, style="NavBar.TFrame", padding=(24, 18))
         self.navbar.grid(row=0, column=0, sticky="ew")
-        self.navbar.grid_columnconfigure(0, weight=1)
+        self.navbar.grid_columnconfigure(0, weight=0)
+        self.navbar.grid_columnconfigure(1, weight=1)
 
         self.nav_button_text = tk.StringVar()
         self.nav_button = ttk.Menubutton(
@@ -2275,10 +2279,11 @@ class POSApp(tk.Tk):
             style="Nav.TMenubutton",
             direction="below",
         )
-        self.nav_button.grid(row=0, column=0, sticky="ew")
+        self.nav_button.grid(row=0, column=0, sticky="w", padx=(0, 16))
 
         self.navigation_menu = tk.Menu(self.nav_button, tearoff=0)
         self.nav_button["menu"] = self.navigation_menu
+        self.navigation_menu.configure(font=self.nav_font)
 
         self.nav_current_view_var = tk.StringVar()
         self.nav_current_view_label = ttk.Label(
@@ -2322,19 +2327,24 @@ class POSApp(tk.Tk):
         }
 
         self._nav_entries: Dict[str, int] = {}
+        self._nav_base_labels: Dict[str, str] = {}
         for key in ["sales", "products", "history", "settings"]:
             view = self.views[key]
             frame = view["frame"]
             frame.grid(row=0, column=0, sticky="nsew")
             frame.grid_remove()
 
+            base_label = self.t(view["label_key"])
             self.navigation_menu.add_radiobutton(
-                label=self.t(view["label_key"]),
+                label=base_label,
                 variable=self.active_view,
                 value=key,
                 command=lambda target=key: self._show_view(target),
             )
             self._nav_entries[key] = self.navigation_menu.index("end")
+            self._nav_base_labels[key] = base_label
+
+        self._update_nav_geometry()
 
         self._show_view("sales")
 
@@ -2344,9 +2354,14 @@ class POSApp(tk.Tk):
         if hasattr(self, "nav_button_text"):
             self.nav_button_text.set(f"{self.t('menu.navigate')} ▾")
         if hasattr(self, "navigation_menu"):
+            if not hasattr(self, "_nav_base_labels"):
+                self._nav_base_labels = {}
             for key, entry_index in self._nav_entries.items():
                 label_key = self.views[key]["label_key"]
-                self.navigation_menu.entryconfig(entry_index, label=self.t(label_key))
+                base_label = self.t(label_key)
+                self._nav_base_labels[key] = base_label
+                self.navigation_menu.entryconfig(entry_index, label=base_label)
+            self._update_nav_geometry()
         if hasattr(self, "nav_current_view_var") and self._current_view:
             current_label_key = self.views[self._current_view]["label_key"]
             self.nav_current_view_var.set(self.t(current_label_key))
@@ -2381,6 +2396,59 @@ class POSApp(tk.Tk):
         if hasattr(self, "nav_current_view_var"):
             label_key = self.views[key]["label_key"]
             self.nav_current_view_var.set(self.t(label_key))
+
+    def _pad_menu_label(self, label: str, target_width: int, font: tkfont.Font) -> str:
+        if target_width <= 0:
+            return label
+
+        padded = label
+        spacer = "\u2007"
+        if font.measure(spacer) == 0:
+            spacer = " "
+
+        while font.measure(padded) < target_width:
+            padded += spacer
+
+        return padded
+
+    def _update_nav_geometry(self) -> None:
+        if not hasattr(self, "nav_button") or not hasattr(self, "navigation_menu"):
+            return
+
+        if not getattr(self, "_nav_entries", None):
+            return
+
+        nav_font = getattr(self, "nav_font", tkfont.Font(family=FONT_FAMILY, size=12, weight="bold"))
+        base_labels = getattr(self, "_nav_base_labels", {})
+        texts = [base_labels.get(key, "") for key in self._nav_entries]
+        texts = [text for text in texts if text]
+
+        if not texts:
+            return
+
+        zero_width = nav_font.measure("0") or 1
+        max_text_width = max(nav_font.measure(text) for text in texts)
+        char_width = max(int(round(max_text_width / zero_width)) + 4, 8)
+        self.nav_button.configure(width=char_width)
+
+        self.update_idletasks()
+        target_width = self.nav_button.winfo_width()
+        if target_width <= 0:
+            target_width = self.nav_button.winfo_reqwidth()
+
+        menu_font = tkfont.Font(font=self.navigation_menu.cget("font"))
+
+        for key, entry_index in self._nav_entries.items():
+            base_label = base_labels.get(key, "")
+            self.navigation_menu.entryconfig(entry_index, label=base_label)
+
+        self.navigation_menu.update_idletasks()
+        inner_target = max(target_width - 24, 0)
+
+        for key, entry_index in self._nav_entries.items():
+            base_label = base_labels.get(key, "")
+            padded_label = self._pad_menu_label(base_label, inner_target, menu_font)
+            self.navigation_menu.entryconfig(entry_index, label=padded_label)
 
     def update_settings(self, language: str, currency: str) -> None:
         if language not in SUPPORTED_LANGUAGES:
