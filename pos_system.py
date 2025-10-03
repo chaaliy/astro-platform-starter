@@ -50,6 +50,7 @@ DEFAULT_CURRENCY = "USD"
 SUPPORTED_LANGUAGES: Dict[str, Dict[str, Any]] = {
     "en": {"name": "English"},
     "es": {"name": "Español"},
+    "fr": {"name": "Français"},
     "ar": {"name": "العربية"},
 }
 
@@ -67,365 +68,444 @@ SUPPORTED_CURRENCIES: Dict[str, Dict[str, Any]] = {
 
 
 TRANSLATIONS: Dict[str, Dict[str, str]] = {
-    "app.title": {"en": "POS System", "es": "Sistema POS", "ar": "نظام نقاط البيع"},
-    "tab.products": {"en": "Products", "es": "Productos", "ar": "المنتجات"},
-    "tab.sales": {"en": "Sales", "es": "Ventas", "ar": "المبيعات"},
-    "tab.history": {"en": "History", "es": "Historial", "ar": "السجل"},
-    "tab.settings": {"en": "Settings", "es": "Configuración", "ar": "الإعدادات"},
+    "app.title": {
+        "en": "POS System",
+        "es": "Sistema POS",
+        "fr": "Système de point de vente",
+        "ar": "نظام نقاط البيع",
+    },
+    "tab.products": {"en": "Products", "es": "Productos", "fr": "Produits", "ar": "المنتجات"},
+    "tab.sales": {"en": "Sales", "es": "Ventas", "fr": "Ventes", "ar": "المبيعات"},
+    "tab.history": {"en": "History", "es": "Historial", "fr": "Historique", "ar": "السجل"},
+    "tab.settings": {"en": "Settings", "es": "Configuración", "fr": "Paramètres", "ar": "الإعدادات"},
+    "menu.navigate": {
+        "en": "Navigate",
+        "es": "Navegar",
+        "fr": "Naviguer",
+        "ar": "التنقل",
+    },
     "inventory.hero.title": {
         "en": "Inventory Studio",
         "es": "Estudio de Inventario",
+        "fr": "Studio d'inventaire",
         "ar": "استوديو المخزون",
     },
     "inventory.hero.subtitle": {
         "en": "Add, update, and monitor your catalog with instant insights.",
         "es": "Agrega, actualiza y supervisa tu catálogo con información al instante.",
+        "fr": "Ajoutez, mettez à jour et surveillez votre catalogue avec des informations instantanées.",
         "ar": "أضف وحدث وراقب قائمتك مع رؤى فورية.",
     },
     "inventory.hero.empty": {
         "en": "No products in inventory yet.",
         "es": "Aún no hay productos en el inventario.",
+        "fr": "Aucun produit en stock pour le moment.",
         "ar": "لا توجد منتجات في المخزون بعد.",
     },
     "inventory.hero.summary": {
         "en": "{count} products • {value} inventory value",
         "es": "{count} productos • {value} valor de inventario",
+        "fr": "{count} produits • {value} valeur de stock",
         "ar": "{count} منتج • قيمة مخزون {value}",
     },
     "inventory.card.form.title": {
         "en": "New or Existing Product",
         "es": "Producto nuevo o existente",
+        "fr": "Produit nouveau ou existant",
         "ar": "منتج جديد أو حالي",
     },
-    "field.product_id": {"en": "Product ID", "es": "ID del producto", "ar": "معرّف المنتج"},
-    "field.name": {"en": "Name", "es": "Nombre", "ar": "الاسم"},
-    "field.price": {"en": "Price", "es": "Precio", "ar": "السعر"},
-    "field.stock": {"en": "Stock", "es": "Existencias", "ar": "المخزون"},
-    "action.add_product": {"en": "Add Product", "es": "Agregar producto", "ar": "إضافة منتج"},
-    "action.update_product": {"en": "Update", "es": "Actualizar", "ar": "تحديث"},
-    "action.clear": {"en": "Clear", "es": "Limpiar", "ar": "مسح"},
-    "action.refresh": {"en": "Refresh", "es": "Actualizar", "ar": "تحديث"},
-    "inventory.card.list.title": {"en": "Inventory", "es": "Inventario", "ar": "المخزون"},
-    "inventory.table.product": {"en": "Product", "es": "Producto", "ar": "المنتج"},
-    "inventory.table.price": {"en": "Price", "es": "Precio", "ar": "السعر"},
-    "inventory.table.stock": {"en": "Stock", "es": "Existencias", "ar": "المخزون"},
+    "field.product_id": {"en": "Product ID", "es": "ID del producto", "fr": "ID du produit", "ar": "معرّف المنتج"},
+    "field.name": {"en": "Name", "es": "Nombre", "fr": "Nom", "ar": "الاسم"},
+    "field.price": {"en": "Price", "es": "Precio", "fr": "Prix", "ar": "السعر"},
+    "field.stock": {"en": "Stock", "es": "Existencias", "fr": "Stock", "ar": "المخزون"},
+    "action.add_product": {
+        "en": "Add Product",
+        "es": "Agregar producto",
+        "fr": "Ajouter un produit",
+        "ar": "إضافة منتج",
+    },
+    "action.update_product": {"en": "Update", "es": "Actualizar", "fr": "Mettre à jour", "ar": "تحديث"},
+    "action.clear": {"en": "Clear", "es": "Limpiar", "fr": "Effacer", "ar": "مسح"},
+    "action.refresh": {"en": "Refresh", "es": "Actualizar", "fr": "Actualiser", "ar": "تحديث"},
+    "inventory.card.list.title": {"en": "Inventory", "es": "Inventario", "fr": "Inventaire", "ar": "المخزون"},
+    "inventory.table.product": {"en": "Product", "es": "Producto", "fr": "Produit", "ar": "المنتج"},
+    "inventory.table.price": {"en": "Price", "es": "Precio", "fr": "Prix", "ar": "السعر"},
+    "inventory.table.stock": {"en": "Stock", "es": "Existencias", "fr": "Stock", "ar": "المخزون"},
     "inventory.success.add": {
         "en": "Product added successfully",
         "es": "Producto agregado correctamente",
+        "fr": "Produit ajouté avec succès",
         "ar": "تمت إضافة المنتج بنجاح",
     },
     "inventory.success.update": {
         "en": "Product updated successfully",
         "es": "Producto actualizado correctamente",
+        "fr": "Produit mis à jour avec succès",
         "ar": "تم تحديث المنتج بنجاح",
     },
     "inventory.error.duplicate": {
         "en": "Product ID already exists",
         "es": "El ID del producto ya existe",
+        "fr": "L'identifiant du produit existe déjà",
         "ar": "معرّف المنتج موجود بالفعل",
     },
     "inventory.error.database": {
         "en": "Database error: {error}",
         "es": "Error de base de datos: {error}",
+        "fr": "Erreur de base de données : {error}",
         "ar": "خطأ في قاعدة البيانات: {error}",
     },
     "inventory.error.invalid": {
         "en": "Price must be a number and stock must be an integer",
         "es": "El precio debe ser un número y las existencias un entero",
+        "fr": "Le prix doit être un nombre et le stock un entier",
         "ar": "يجب أن يكون السعر رقماً والمخزون عدداً صحيحاً",
     },
     "inventory.error.negative": {
         "en": "Price and stock must be non-negative",
         "es": "El precio y las existencias deben ser no negativos",
+        "fr": "Le prix et le stock doivent être positifs",
         "ar": "يجب أن يكون السعر والمخزون غير سالبين",
     },
     "inventory.error.required": {
         "en": "Product ID and name are required",
         "es": "El ID y el nombre del producto son obligatorios",
+        "fr": "L'identifiant du produit et le nom sont obligatoires",
         "ar": "معرّف المنتج والاسم مطلوبان",
     },
-    "sales.hero.title": {"en": "Sales Checkout", "es": "Caja de ventas", "ar": "إنهاء المبيعات"},
+    "sales.hero.title": {"en": "Sales Checkout", "es": "Caja de ventas", "fr": "Passage en caisse", "ar": "إنهاء المبيعات"},
     "sales.hero.subtitle": {
         "en": "Scan items into the cart, monitor totals, and wrap receipts instantly.",
         "es": "Escanea artículos al carrito, controla totales y emite recibos al instante.",
+        "fr": "Scannez les articles dans le panier, suivez les totaux et imprimez les reçus instantanément.",
         "ar": "أضف العناصر إلى السلة، وتابع الإجماليات، واطبع الفواتير فوراً.",
     },
-    "sales.hero.empty": {"en": "Cart is empty.", "es": "El carrito está vacío.", "ar": "السلة فارغة."},
+    "sales.hero.empty": {"en": "Cart is empty.", "es": "El carrito está vacío.", "fr": "Le panier est vide.", "ar": "السلة فارغة."},
     "sales.hero.summary": {
         "en": "{count} {label} • {total}",
         "es": "{count} {label} • {total}",
+        "fr": "{count} {label} • {total}",
         "ar": "{count} {label} • {total}",
     },
-    "sales.hero.items": {"en": "items", "es": "artículos", "ar": "عناصر"},
-    "sales.hero.item": {"en": "item", "es": "artículo", "ar": "عنصر"},
+    "sales.hero.items": {"en": "items", "es": "artículos", "fr": "articles", "ar": "عناصر"},
+    "sales.hero.item": {"en": "item", "es": "artículo", "fr": "article", "ar": "عنصر"},
     "sales.status.prompt": {
         "en": "Ready to build a cart.",
         "es": "Listo para armar un carrito.",
+        "fr": "Prêt à créer un panier.",
         "ar": "جاهز لبناء السلة.",
     },
-    "sales.quick_add": {"en": "Quick Add", "es": "Agregar rápido", "ar": "إضافة سريعة"},
-    "field.quantity": {"en": "Quantity", "es": "Cantidad", "ar": "الكمية"},
-    "action.add_to_cart": {"en": "Add to Cart", "es": "Agregar al carrito", "ar": "إضافة إلى السلة"},
+    "sales.quick_add": {"en": "Quick Add", "es": "Agregar rápido", "fr": "Ajout rapide", "ar": "إضافة سريعة"},
+    "field.quantity": {"en": "Quantity", "es": "Cantidad", "fr": "Quantité", "ar": "الكمية"},
+    "action.add_to_cart": {"en": "Add to Cart", "es": "Agregar al carrito", "fr": "Ajouter au panier", "ar": "إضافة إلى السلة"},
     "action.remove_selected": {
         "en": "Remove Selected",
         "es": "Eliminar seleccionado",
+        "fr": "Supprimer la sélection",
         "ar": "إزالة المحدد",
     },
-    "action.clear_cart": {"en": "Clear Cart", "es": "Vaciar carrito", "ar": "إفراغ السلة"},
-    "sales.summary.title": {"en": "Checkout Summary", "es": "Resumen de pago", "ar": "ملخص الدفع"},
-    "label.subtotal": {"en": "Subtotal", "es": "Subtotal", "ar": "الإجمالي الفرعي"},
-    "label.balance_due": {"en": "Balance Due", "es": "Saldo a pagar", "ar": "المبلغ المستحق"},
-    "action.finalize_sale": {"en": "Finalize Sale", "es": "Finalizar venta", "ar": "إتمام البيع"},
-    "action.print_invoice": {"en": "Print Invoice", "es": "Imprimir factura", "ar": "طباعة الفاتورة"},
-    "sales.cart.title": {"en": "Active Cart", "es": "Carrito activo", "ar": "السلة النشطة"},
+    "action.clear_cart": {"en": "Clear Cart", "es": "Vaciar carrito", "fr": "Vider le panier", "ar": "إفراغ السلة"},
+    "sales.summary.title": {"en": "Checkout Summary", "es": "Resumen de pago", "fr": "Récapitulatif", "ar": "ملخص الدفع"},
+    "label.subtotal": {"en": "Subtotal", "es": "Subtotal", "fr": "Sous-total", "ar": "الإجمالي الفرعي"},
+    "label.balance_due": {"en": "Balance Due", "es": "Saldo a pagar", "fr": "Montant dû", "ar": "المبلغ المستحق"},
+    "action.finalize_sale": {"en": "Finalize Sale", "es": "Finalizar venta", "fr": "Finaliser la vente", "ar": "إتمام البيع"},
+    "action.print_invoice": {"en": "Print Invoice", "es": "Imprimir factura", "fr": "Imprimer la facture", "ar": "طباعة الفاتورة"},
+    "sales.cart.title": {"en": "Active Cart", "es": "Carrito activo", "fr": "Panier actif", "ar": "السلة النشطة"},
     "sales.status.ready": {
         "en": "Sale completed at {timestamp} • Invoice ready to print.",
         "es": "Venta completada a las {timestamp} • Factura lista para imprimir.",
+        "fr": "Vente terminée à {timestamp} • Facture prête à être imprimée.",
         "ar": "اكتمل البيع في {timestamp} • الفاتورة جاهزة للطباعة.",
     },
     "sales.warning.empty": {
         "en": "No items in cart to finalize",
         "es": "No hay artículos en el carrito para finalizar",
+        "fr": "Aucun article dans le panier à finaliser",
         "ar": "لا توجد عناصر في السلة للإتمام",
     },
     "sales.warning.add_items": {
         "en": "Add items to the cart before finalizing.",
         "es": "Agrega artículos al carrito antes de finalizar.",
+        "fr": "Ajoutez des articles au panier avant de finaliser.",
         "ar": "أضف عناصر إلى السلة قبل الإتمام.",
     },
     "sales.error.not_found": {
         "en": "Product {product_id} no longer exists",
         "es": "El producto {product_id} ya no existe",
+        "fr": "Le produit {product_id} n'existe plus",
         "ar": "المنتج {product_id} لم يعد موجوداً",
     },
     "sales.error.insufficient_stock": {
         "en": "Only {stock} units available for {name}",
         "es": "Solo hay {stock} unidades disponibles de {name}",
+        "fr": "Seulement {stock} unités disponibles pour {name}",
         "ar": "متوفر فقط {stock} وحدة من {name}",
     },
     "sales.error.generic": {
         "en": "Failed to finalize sale. Please try again.",
         "es": "No se pudo finalizar la venta. Inténtalo de nuevo.",
+        "fr": "Échec de la finalisation de la vente. Veuillez réessayer.",
         "ar": "تعذر إتمام البيع. يرجى المحاولة مرة أخرى.",
     },
     "sales.success.total": {
         "en": "Total charged: {total}",
         "es": "Total cobrado: {total}",
+        "fr": "Montant facturé : {total}",
         "ar": "المبلغ المحصل: {total}",
     },
     "sales.status.added": {
         "en": "Added {quantity} × {name} to the cart.",
         "es": "{quantity} × {name} agregado al carrito.",
+        "fr": "Ajout de {quantity} × {name} au panier.",
         "ar": "تمت إضافة {quantity} × {name} إلى السلة.",
     },
     "sales.status.updated": {
         "en": "Updated {quantity} × {name} in the cart.",
         "es": "{quantity} × {name} actualizado en el carrito.",
+        "fr": "Mise à jour de {quantity} × {name} dans le panier.",
         "ar": "تم تحديث {quantity} × {name} في السلة.",
     },
     "sales.status.removed": {
         "en": "Removed {name} from the cart.",
         "es": "{name} eliminado del carrito.",
+        "fr": "{name} retiré du panier.",
         "ar": "تمت إزالة {name} من السلة.",
     },
     "sales.status.cleared": {
         "en": "Cart cleared.",
         "es": "Carrito vacío.",
+        "fr": "Panier vidé.",
         "ar": "تم إفراغ السلة.",
     },
     "sales.status.invalid": {
         "en": "Enter a valid product ID and quantity.",
         "es": "Ingresa un ID de producto y cantidad válidos.",
+        "fr": "Saisissez un identifiant produit et une quantité valides.",
         "ar": "أدخل معرف منتج وكماً صالحين.",
     },
     "sales.error.quantity": {
         "en": "Quantity must be a positive integer.",
         "es": "La cantidad debe ser un entero positivo.",
+        "fr": "La quantité doit être un entier positif.",
         "ar": "يجب أن تكون الكمية عدداً صحيحاً موجباً.",
     },
     "sales.status.stock": {
         "en": "Only {stock} left for {name}.",
         "es": "Solo quedan {stock} de {name}.",
+        "fr": "Il ne reste que {stock} pour {name}.",
         "ar": "تبقى فقط {stock} من {name}.",
     },
     "sales.status.not_found": {
         "en": "Product ID not found in inventory.",
         "es": "ID de producto no encontrado en el inventario.",
+        "fr": "Identifiant produit introuvable dans l'inventaire.",
         "ar": "معرّف المنتج غير موجود في المخزون.",
     },
     "sales.status.select_item": {
         "en": "Select an item to remove from the cart.",
         "es": "Selecciona un artículo para quitar del carrito.",
+        "fr": "Sélectionnez un article à retirer du panier.",
         "ar": "اختر عنصراً لإزالته من السلة.",
     },
     "sales.status.no_longer_exists": {
         "en": "Product {product_id} no longer exists.",
         "es": "El producto {product_id} ya no existe.",
+        "fr": "Le produit {product_id} n'existe plus.",
         "ar": "المنتج {product_id} لم يعد موجوداً.",
     },
     "sales.dialog.invalid_quantity": {
         "en": "Invalid quantity",
         "es": "Cantidad inválida",
+        "fr": "Quantité invalide",
         "ar": "كمية غير صالحة",
     },
-    "sales.cart.heading.product_id": {"en": "Product Id", "es": "ID", "ar": "معرّف المنتج"},
-    "sales.cart.heading.name": {"en": "Name", "es": "Nombre", "ar": "الاسم"},
-    "sales.cart.heading.price": {"en": "Price", "es": "Precio", "ar": "السعر"},
-    "sales.cart.heading.quantity": {"en": "Qty", "es": "Cant.", "ar": "العدد"},
-    "sales.cart.heading.total": {"en": "Total", "es": "Total", "ar": "الإجمالي"},
-    "history.hero.title": {"en": "Purchase History", "es": "Historial de compras", "ar": "سجل المشتريات"},
+    "sales.cart.heading.product_id": {
+        "en": "Product Id",
+        "es": "ID",
+        "fr": "ID produit",
+        "ar": "معرّف المنتج",
+    },
+    "sales.cart.heading.name": {"en": "Name", "es": "Nombre", "fr": "Nom", "ar": "الاسم"},
+    "sales.cart.heading.price": {"en": "Price", "es": "Precio", "fr": "Prix", "ar": "السعر"},
+    "sales.cart.heading.quantity": {"en": "Qty", "es": "Cant.", "fr": "Qté", "ar": "العدد"},
+    "sales.cart.heading.total": {"en": "Total", "es": "Total", "fr": "Total", "ar": "الإجمالي"},
+    "history.hero.title": {"en": "Purchase History", "es": "Historial de compras", "fr": "Historique des achats", "ar": "سجل المشتريات"},
     "history.hero.subtitle": {
         "en": "Browse previous receipts, revisit totals, and reprint invoices on demand.",
         "es": "Explora recibos anteriores, revisa totales y reimprime facturas al instante.",
+        "fr": "Consultez les reçus précédents, révisez les totaux et réimprimez les factures à la demande.",
         "ar": "تصفح الإيصالات السابقة، وراجع الإجماليات، وأعد طباعة الفواتير عند الطلب.",
     },
     "history.hero.empty": {
         "en": "No purchases recorded yet.",
         "es": "Aún no se registran compras.",
+        "fr": "Aucun achat enregistré pour le moment.",
         "ar": "لا توجد عمليات شراء مسجلة بعد.",
     },
     "history.hero.summary": {
         "en": "{count} sales • {revenue} revenue captured",
         "es": "{count} ventas • {revenue} ingresos registrados",
+        "fr": "{count} ventes • {revenue} de chiffre d'affaires",
         "ar": "{count} عملية بيع • إيرادات {revenue}",
     },
-    "history.card.title": {"en": "Recent Sales", "es": "Ventas recientes", "ar": "أحدث المبيعات"},
-    "history.refresh": {"en": "Refresh", "es": "Actualizar", "ar": "تحديث"},
-    "history.table.sale_id": {"en": "Sale #", "es": "Venta #", "ar": "رقم البيع"},
-    "history.table.timestamp": {"en": "Completed", "es": "Completada", "ar": "مكتمل"},
-    "history.table.items": {"en": "Items", "es": "Artículos", "ar": "العناصر"},
-    "history.table.subtotal": {"en": "Subtotal", "es": "Subtotal", "ar": "الإجمالي الفرعي"},
-    "history.table.total": {"en": "Total", "es": "Total", "ar": "الإجمالي"},
-    "history.details.title": {"en": "Sale Details", "es": "Detalles de la venta", "ar": "تفاصيل البيع"},
+    "history.card.title": {"en": "Recent Sales", "es": "Ventas recientes", "fr": "Ventes récentes", "ar": "أحدث المبيعات"},
+    "history.refresh": {"en": "Refresh", "es": "Actualizar", "fr": "Actualiser", "ar": "تحديث"},
+    "history.table.sale_id": {"en": "Sale #", "es": "Venta #", "fr": "Vente #", "ar": "رقم البيع"},
+    "history.table.timestamp": {"en": "Completed", "es": "Completada", "fr": "Terminée", "ar": "مكتمل"},
+    "history.table.items": {"en": "Items", "es": "Artículos", "fr": "Articles", "ar": "العناصر"},
+    "history.table.subtotal": {"en": "Subtotal", "es": "Subtotal", "fr": "Sous-total", "ar": "الإجمالي الفرعي"},
+    "history.table.total": {"en": "Total", "es": "Total", "fr": "Total", "ar": "الإجمالي"},
+    "history.details.title": {"en": "Sale Details", "es": "Detalles de la venta", "fr": "Détails de la vente", "ar": "تفاصيل البيع"},
     "history.details.none": {
         "en": "Select a sale to see its details.",
         "es": "Selecciona una venta para ver sus detalles.",
+        "fr": "Sélectionnez une vente pour voir ses détails.",
         "ar": "اختر عملية بيع لرؤية تفاصيلها.",
     },
     "history.details.line": {
         "en": "{quantity} × {name} (@ {price}) = {total}",
         "es": "{quantity} × {name} (@ {price}) = {total}",
+        "fr": "{quantity} × {name} (@ {price}) = {total}",
         "ar": "{quantity} × {name} (@ {price}) = {total}",
     },
-    "history.details.subtotal": {"en": "Subtotal: {value}", "es": "Subtotal: {value}", "ar": "الإجمالي الفرعي: {value}"},
-    "history.details.total": {"en": "Balance Due: {value}", "es": "Total: {value}", "ar": "المبلغ المستحق: {value}"},
-    "history.action.open": {"en": "Open Invoice", "es": "Abrir factura", "ar": "فتح الفاتورة"},
+    "history.details.subtotal": {"en": "Subtotal: {value}", "es": "Subtotal: {value}", "fr": "Sous-total : {value}", "ar": "الإجمالي الفرعي: {value}"},
+    "history.details.total": {"en": "Balance Due: {value}", "es": "Total: {value}", "fr": "Montant dû : {value}", "ar": "المبلغ المستحق: {value}"},
+    "history.action.open": {"en": "Open Invoice", "es": "Abrir factura", "fr": "Ouvrir la facture", "ar": "فتح الفاتورة"},
     "history.info.none": {
         "en": "No sale selected",
         "es": "No hay venta seleccionada",
+        "fr": "Aucune vente sélectionnée",
         "ar": "لم يتم اختيار بيع",
     },
     "history.info.select": {
         "en": "Select a sale to open its invoice.",
         "es": "Selecciona una venta para abrir su factura.",
+        "fr": "Sélectionnez une vente pour ouvrir sa facture.",
         "ar": "اختر عملية بيع لفتح فاتورتها.",
     },
     "history.status.updated": {
         "en": "History refreshed.",
         "es": "Historial actualizado.",
+        "fr": "Historique actualisé.",
         "ar": "تم تحديث السجل.",
     },
-    "invoice.title": {"en": "Invoice Preview", "es": "Vista previa de factura", "ar": "معاينة الفاتورة"},
-    "invoice.header": {"en": "POS System Invoice", "es": "Factura del sistema POS", "ar": "فاتورة نظام نقاط البيع"},
+    "invoice.title": {"en": "Invoice Preview", "es": "Vista previa de factura", "fr": "Aperçu de la facture", "ar": "معاينة الفاتورة"},
+    "invoice.header": {"en": "POS System Invoice", "es": "Factura del sistema POS", "fr": "Facture du système POS", "ar": "فاتورة نظام نقاط البيع"},
     "invoice.columns": {
         "en": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
         "es": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
+        "fr": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
         "ar": "{id:<10}{name:<26}{qty:>5}{price:>16}{total:>15}",
     },
-    "invoice.column.id": {"en": "ID", "es": "ID", "ar": "المعرف"},
-    "invoice.column.product": {"en": "Product", "es": "Producto", "ar": "المنتج"},
-    "invoice.column.qty": {"en": "Qty", "es": "Cant.", "ar": "الكمية"},
-    "invoice.column.price": {"en": "Price", "es": "Precio", "ar": "السعر"},
-    "invoice.column.total": {"en": "Total", "es": "Total", "ar": "الإجمالي"},
-    "invoice.sale_number": {"en": "Sale #", "es": "Venta #", "ar": "رقم البيع"},
-    "invoice.completed": {"en": "Completed:", "es": "Completado:", "ar": "مكتمل:"},
-    "invoice.subtotal": {"en": "Subtotal:", "es": "Subtotal:", "ar": "الإجمالي الفرعي:"},
-    "invoice.total": {"en": "Balance Due:", "es": "Total:", "ar": "المبلغ المستحق:"},
+    "invoice.column.id": {"en": "ID", "es": "ID", "fr": "ID", "ar": "المعرف"},
+    "invoice.column.product": {"en": "Product", "es": "Producto", "fr": "Produit", "ar": "المنتج"},
+    "invoice.column.qty": {"en": "Qty", "es": "Cant.", "fr": "Qté", "ar": "الكمية"},
+    "invoice.column.price": {"en": "Price", "es": "Precio", "fr": "Prix", "ar": "السعر"},
+    "invoice.column.total": {"en": "Total", "es": "Total", "fr": "Total", "ar": "الإجمالي"},
+    "invoice.sale_number": {"en": "Sale #", "es": "Venta #", "fr": "Vente #", "ar": "رقم البيع"},
+    "invoice.completed": {"en": "Completed:", "es": "Completado:", "fr": "Terminé :", "ar": "مكتمل:"},
+    "invoice.subtotal": {"en": "Subtotal:", "es": "Subtotal:", "fr": "Sous-total :", "ar": "الإجمالي الفرعي:"},
+    "invoice.total": {"en": "Balance Due:", "es": "Total:", "fr": "Montant dû :", "ar": "المبلغ المستحق:"},
     "invoice.footer": {
         "en": "Thank you for shopping with us!",
         "es": "¡Gracias por su compra!",
+        "fr": "Merci de votre achat !",
         "ar": "شكراً لتسوقكم معنا!",
     },
-    "invoice.save": {"en": "Save As…", "es": "Guardar como…", "ar": "حفظ باسم…"},
-    "invoice.print": {"en": "Print", "es": "Imprimir", "ar": "طباعة"},
-    "invoice.close": {"en": "Close", "es": "Cerrar", "ar": "إغلاق"},
-    "invoice.save.title": {"en": "Save invoice", "es": "Guardar factura", "ar": "حفظ الفاتورة"},
+    "invoice.save": {"en": "Save As…", "es": "Guardar como…", "fr": "Enregistrer sous…", "ar": "حفظ باسم…"},
+    "invoice.print": {"en": "Print", "es": "Imprimir", "fr": "Imprimer", "ar": "طباعة"},
+    "invoice.close": {"en": "Close", "es": "Cerrar", "fr": "Fermer", "ar": "إغلاق"},
+    "invoice.save.title": {"en": "Save invoice", "es": "Guardar factura", "fr": "Enregistrer la facture", "ar": "حفظ الفاتورة"},
     "invoice.save.error": {
         "en": "Could not save invoice: {error}",
         "es": "No se pudo guardar la factura: {error}",
+        "fr": "Impossible d'enregistrer la facture : {error}",
         "ar": "تعذر حفظ الفاتورة: {error}",
     },
     "invoice.save.success": {
         "en": "Invoice saved to {path}",
         "es": "Factura guardada en {path}",
+        "fr": "Facture enregistrée dans {path}",
         "ar": "تم حفظ الفاتورة في {path}",
     },
     "invoice.print.sent": {
         "en": "Invoice sent to the default printer.",
         "es": "Factura enviada a la impresora predeterminada.",
+        "fr": "Facture envoyée à l'imprimante par défaut.",
         "ar": "تم إرسال الفاتورة إلى الطابعة الافتراضية.",
     },
     "invoice.print.missing": {
         "en": "The system printing utility was not found. Save the invoice and print manually.",
         "es": "No se encontró la utilidad de impresión del sistema. Guarda la factura e imprímela manualmente.",
+        "fr": "L'outil d'impression du système est introuvable. Enregistrez la facture et imprimez-la manuellement.",
         "ar": "لم يتم العثور على أداة طباعة النظام. احفظ الفاتورة واطبعها يدوياً.",
     },
     "invoice.print.error": {
         "en": "Could not print invoice: {error}",
         "es": "No se pudo imprimir la factura: {error}",
+        "fr": "Impossible d'imprimer la facture : {error}",
         "ar": "تعذر طباعة الفاتورة: {error}",
     },
     "sales.invoice.none.title": {
         "en": "No invoice",
         "es": "Sin factura",
+        "fr": "Aucune facture",
         "ar": "لا توجد فاتورة",
     },
     "sales.invoice.none.message": {
         "en": "Complete a sale to print an invoice.",
         "es": "Completa una venta para imprimir una factura.",
+        "fr": "Finalisez une vente pour imprimer une facture.",
         "ar": "أكمل عملية البيع لطباعة الفاتورة.",
     },
     "sales.error.database": {
         "en": "Failed to finalize sale: {error}",
         "es": "No se pudo finalizar la venta: {error}",
+        "fr": "Impossible de finaliser la vente : {error}",
         "ar": "تعذر إتمام البيع: {error}",
     },
-    "settings.hero.title": {"en": "Preferences", "es": "Preferencias", "ar": "التفضيلات"},
+    "settings.hero.title": {"en": "Preferences", "es": "Preferencias", "fr": "Préférences", "ar": "التفضيلات"},
     "settings.hero.subtitle": {
         "en": "Tailor language and currency to match your sales counter.",
         "es": "Adapta el idioma y la moneda a tu mostrador de ventas.",
+        "fr": "Ajustez la langue et la devise à votre comptoir de vente.",
         "ar": "خصص اللغة والعملة لتناسب نقطة البيع لديك.",
     },
-    "settings.language.label": {"en": "Language", "es": "Idioma", "ar": "اللغة"},
-    "settings.currency.label": {"en": "Currency", "es": "Moneda", "ar": "العملة"},
-    "settings.apply": {"en": "Apply Changes", "es": "Aplicar cambios", "ar": "تطبيق التغييرات"},
+    "settings.language.label": {"en": "Language", "es": "Idioma", "fr": "Langue", "ar": "اللغة"},
+    "settings.currency.label": {"en": "Currency", "es": "Moneda", "fr": "Devise", "ar": "العملة"},
+    "settings.apply": {"en": "Apply Changes", "es": "Aplicar cambios", "fr": "Appliquer les modifications", "ar": "تطبيق التغييرات"},
     "settings.notice": {
         "en": "Settings updated successfully.",
         "es": "Configuración actualizada correctamente.",
+        "fr": "Paramètres mis à jour avec succès.",
         "ar": "تم تحديث الإعدادات بنجاح.",
     },
-    "dialog.success": {"en": "Success", "es": "Éxito", "ar": "نجاح"},
-    "dialog.error": {"en": "Error", "es": "Error", "ar": "خطأ"},
-    "dialog.warning": {"en": "Warning", "es": "Advertencia", "ar": "تحذير"},
-    "dialog.info": {"en": "Information", "es": "Información", "ar": "معلومات"},
+    "dialog.success": {"en": "Success", "es": "Éxito", "fr": "Succès", "ar": "نجاح"},
+    "dialog.error": {"en": "Error", "es": "Error", "fr": "Erreur", "ar": "خطأ"},
+    "dialog.warning": {"en": "Warning", "es": "Advertencia", "fr": "Avertissement", "ar": "تحذير"},
+    "dialog.info": {"en": "Information", "es": "Información", "fr": "Information", "ar": "معلومات"},
     "sales.dialog.empty": {
         "en": "Empty cart",
         "es": "Carrito vacío",
+        "fr": "Panier vide",
         "ar": "سلة فارغة",
     },
     "sales.dialog.not_found": {
         "en": "Error",
         "es": "Error",
+        "fr": "Erreur",
         "ar": "خطأ",
     },
     "sales.dialog.stock": {
         "en": "Insufficient stock",
         "es": "Stock insuficiente",
+        "fr": "Stock insuffisant",
         "ar": "مخزون غير كافٍ",
     },
     "settings.applied.status": {
         "en": "Language changed to {language}, currency set to {currency}.",
         "es": "Idioma cambiado a {language}, moneda establecida en {currency}.",
+        "fr": "Langue changée en {language}, devise définie sur {currency}.",
         "ar": "تم تغيير اللغة إلى {language}، وتم تعيين العملة إلى {currency}.",
     },
 }
@@ -2158,52 +2238,73 @@ class POSApp(tk.Tk):
 
         style.configure("TScrollbar", troughcolor=PALETTE["surface"], background=PALETTE["primary"])
 
-        style.configure("TNotebook", background=PALETTE["bg"], borderwidth=0)
-        style.configure(
-            "TNotebook.Tab",
-            background=PALETTE["surface_alt"],
-            foreground=PALETTE["muted"],
-            padding=(16, 8),
-        )
-        style.map(
-            "TNotebook.Tab",
-            background=[("selected", PALETTE["surface"])],
-            foreground=[("selected", PALETTE["primary_dark"])],
-        )
-
     def _build_ui(self) -> None:
-        self.notebook = ttk.Notebook(self)
-        self.notebook.pack(fill=tk.BOTH, expand=True)
+        self.menubar = tk.Menu(self)
+        self.config(menu=self.menubar)
 
-        self.product_manager = ProductManagerFrame(
-            self.notebook,
-            db=self.db,
-            on_inventory_change=self._notify_inventory_change,
-            app=self,
-        )
-        self.notebook.add(self.product_manager, text=self.t("tab.products"))
+        self.navigation_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label=self.t("menu.navigate"), menu=self.navigation_menu)
+        self._nav_cascade_index = self.menubar.index("end")
+
+        self.active_view = tk.StringVar(value="sales")
+        self._current_view: Optional[str] = None
+
+        self.content = ttk.Frame(self, style="Background.TFrame")
+        self.content.pack(fill=tk.BOTH, expand=True)
+        self.content.grid_columnconfigure(0, weight=1)
+        self.content.grid_rowconfigure(0, weight=1)
 
         self.sales_frame = SalesFrame(
-            self.notebook,
+            self.content,
             db=self.db,
             inventory_provider=self.db.list_products,
             on_sale_complete=self._handle_sale_complete,
             app=self,
         )
-        self.notebook.add(self.sales_frame, text=self.t("tab.sales"))
 
-        self.history_frame = PurchaseHistoryFrame(self.notebook, db=self.db, app=self)
-        self.notebook.add(self.history_frame, text=self.t("tab.history"))
+        self.product_manager = ProductManagerFrame(
+            self.content,
+            db=self.db,
+            on_inventory_change=self._notify_inventory_change,
+            app=self,
+        )
 
-        self.settings_frame = SettingsFrame(self.notebook, app=self)
-        self.notebook.add(self.settings_frame, text=self.t("tab.settings"))
+        self.history_frame = PurchaseHistoryFrame(self.content, db=self.db, app=self)
+        self.settings_frame = SettingsFrame(self.content, app=self)
+
+        self.views = {
+            "sales": {"frame": self.sales_frame, "label_key": "tab.sales"},
+            "products": {"frame": self.product_manager, "label_key": "tab.products"},
+            "history": {"frame": self.history_frame, "label_key": "tab.history"},
+            "settings": {"frame": self.settings_frame, "label_key": "tab.settings"},
+        }
+
+        self._nav_entries: Dict[str, int] = {}
+        for key in ["sales", "products", "history", "settings"]:
+            view = self.views[key]
+            frame = view["frame"]
+            frame.grid(row=0, column=0, sticky="nsew")
+            frame.grid_remove()
+
+            self.navigation_menu.add_radiobutton(
+                label=self.t(view["label_key"]),
+                variable=self.active_view,
+                value=key,
+                command=lambda target=key: self._show_view(target),
+            )
+            self._nav_entries[key] = self.navigation_menu.index("end")
+
+        self._show_view("sales")
 
     def apply_settings(self) -> None:
         self.title(self.t("app.title"))
-        self.notebook.tab(self.product_manager, text=self.t("tab.products"))
-        self.notebook.tab(self.sales_frame, text=self.t("tab.sales"))
-        self.notebook.tab(self.history_frame, text=self.t("tab.history"))
-        self.notebook.tab(self.settings_frame, text=self.t("tab.settings"))
+
+        if hasattr(self, "menubar") and hasattr(self, "navigation_menu"):
+            if self._nav_cascade_index is not None:
+                self.menubar.entryconfig(self._nav_cascade_index, label=self.t("menu.navigate"))
+            for key, entry_index in self._nav_entries.items():
+                label_key = self.views[key]["label_key"]
+                self.navigation_menu.entryconfig(entry_index, label=self.t(label_key))
 
         self.product_manager.apply_settings()
         self.product_manager.refresh_products()
@@ -2217,6 +2318,20 @@ class POSApp(tk.Tk):
         self.history_frame.refresh_history()
 
         self.settings_frame.apply_settings()
+
+    def _show_view(self, key: str) -> None:
+        if key not in self.views:
+            return
+
+        if self._current_view is not None:
+            self.views[self._current_view]["frame"].grid_remove()
+
+        frame = self.views[key]["frame"]
+        frame.grid()
+        self._current_view = key
+
+        if self.active_view.get() != key:
+            self.active_view.set(key)
 
     def update_settings(self, language: str, currency: str) -> None:
         if language not in SUPPORTED_LANGUAGES:
