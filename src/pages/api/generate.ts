@@ -3,7 +3,12 @@ import type { APIRoute } from 'astro';
 export const prerender = false;
 
 const API_URL = 'https://api.openai.com/v1/chat/completions';
-const API_KEY = import.meta.env.DOCUMENT_AUTOMATION_OPENAI_KEY ?? 'sk-eb7e583fadbb4ce2967985fc6aede583';
+const API_KEY =
+    import.meta.env.DOCUMENT_AUTOMATION_OPENAI_KEY ??
+    import.meta.env.OPENAI_API_KEY ??
+    process.env.DOCUMENT_AUTOMATION_OPENAI_KEY ??
+    process.env.OPENAI_API_KEY ??
+    '';
 
 const buildUserPrompt = (
     documentType: {

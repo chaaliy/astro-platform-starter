@@ -172,12 +172,14 @@ const DocumentGenerator = () => {
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [copied, setCopied] = useState(false);
     const [showValidationErrors, setShowValidationErrors] = useState(false);
+    const [downloadError, setDownloadError] = useState<string | null>(null);
 
     useEffect(() => {
         setFormValues(defaultFormState(selectedDefinition));
         setGenerationState({ status: 'idle' });
         setCopied(false);
         setShowValidationErrors(false);
+        setDownloadError(null);
     }, [selectedDefinition]);
 
     const isFormValid = useMemo(
@@ -204,6 +206,7 @@ const DocumentGenerator = () => {
 
         setGenerationState({ status: 'loading' });
         setCopied(false);
+        setDownloadError(null);
 
         try {
             const response = await fetch('/api/generate', {
@@ -264,15 +267,21 @@ const DocumentGenerator = () => {
 
     const handleDownload = () => {
         if (generationState.status !== 'done' || !selectedDefinition) return;
-        const blob = createPdf(selectedDefinition.name, generationState.content);
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${selectedDefinition.name}.pdf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+        try {
+            setDownloadError(null);
+            const blob = createPdf(selectedDefinition.name, generationState.content);
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${selectedDefinition.name}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('PDF export error', error);
+            setDownloadError('تعذر إنشاء ملف PDF. يرجى تحديث المتصفح أو إعادة المحاولة لاحقاً.');
+        }
     };
 
     const handleCopy = async () => {
@@ -427,6 +436,7 @@ const DocumentGenerator = () => {
                                     setShowValidationErrors(false);
                                     setGenerationState({ status: 'idle' });
                                     setCopied(false);
+                                    setDownloadError(null);
                                 }}
                             >
                                 إعادة تعيين الحقول
@@ -469,12 +479,22 @@ const DocumentGenerator = () => {
                                         {copied ? 'تم النسخ ✔' : 'نسخ المحتوى'}
                                     </button>
                                 </div>
+                                {downloadError && (
+                                    <p className="mt-2 text-sm text-red-200">{downloadError}</p>
+                                )}
                             </header>
                             <article className="max-h-[480px] overflow-y-auto whitespace-pre-wrap rounded-2xl bg-gray-950/40 p-5 leading-8 text-white/95 shadow-inner">
                                 {generationState.content}
                             </article>
                             <div className="flex justify-end">
-                                <button type="button" className="btn bg-white/10 text-white" onClick={() => setGenerationState({ status: 'idle' })}>
+                                <button
+                                    type="button"
+                                    className="btn bg-white/10 text-white"
+                                    onClick={() => {
+                                        setGenerationState({ status: 'idle' });
+                                        setDownloadError(null);
+                                    }}
+                                >
                                     توليد وثيقة جديدة
                                 </button>
                             </div>
