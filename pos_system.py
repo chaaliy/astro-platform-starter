@@ -29,16 +29,18 @@ DB_FILE = Path("pos_system.db")
 
 
 PALETTE = {
-    "bg": "#f3f4ff",
-    "surface": "#ffffff",
-    "surface_alt": "#ecf2ff",
-    "primary": "#6366f1",
-    "primary_dark": "#4f46e5",
-    "accent": "#f97316",
-    "text": "#1f2937",
-    "muted": "#64748b",
-    "hero_fg": "#eef2ff",
-    "hero_muted": "#c7d2fe",
+    "bg": "#161b2c",
+    "surface": "#1f2538",
+    "surface_alt": "#252c41",
+    "primary": "#ff5b60",
+    "primary_dark": "#e2484d",
+    "accent": "#5b8dff",
+    "text": "#f8fafc",
+    "muted": "#94a3b8",
+    "hero_fg": "#ffffff",
+    "hero_muted": "#cbd5f5",
+    "panel": "#20273a",
+    "card_border": "#2f364e",
 }
 
 FONT_FAMILY = "Segoe UI"
@@ -174,12 +176,17 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "fr": "L'identifiant du produit et le nom sont obligatoires",
         "ar": "معرّف المنتج والاسم مطلوبان",
     },
-    "sales.hero.title": {"en": "Sales Checkout", "es": "Caja de ventas", "fr": "Passage en caisse", "ar": "إنهاء المبيعات"},
+    "sales.hero.title": {
+        "en": "Today's Menu",
+        "es": "Menú de hoy",
+        "fr": "Menu du jour",
+        "ar": "قائمة اليوم",
+    },
     "sales.hero.subtitle": {
-        "en": "Scan items into the cart, monitor totals, and wrap receipts instantly.",
-        "es": "Escanea artículos al carrito, controla totales y emite recibos al instante.",
-        "fr": "Scannez les articles dans le panier, suivez les totaux et imprimez les reçus instantanément.",
-        "ar": "أضف العناصر إلى السلة، وتابع الإجماليات، واطبع الفواتير فوراً.",
+        "en": "Tap a tile to add it to the current order.",
+        "es": "Toca una tarjeta para agregarla al pedido.",
+        "fr": "Appuyez sur une tuile pour l'ajouter à la commande.",
+        "ar": "اضغط على العنصر لإضافته إلى الطلب الحالي.",
     },
     "sales.hero.empty": {"en": "Cart is empty.", "es": "El carrito está vacío.", "fr": "Le panier est vide.", "ar": "السلة فارغة."},
     "sales.hero.summary": {
@@ -196,7 +203,48 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
         "fr": "Prêt à créer un panier.",
         "ar": "جاهز لبناء السلة.",
     },
-    "sales.quick_add": {"en": "Quick Add", "es": "Agregar rápido", "fr": "Ajout rapide", "ar": "إضافة سريعة"},
+    "sales.categories.title": {
+        "en": "Menu",
+        "es": "Menú",
+        "fr": "Menu",
+        "ar": "القائمة",
+    },
+    "sales.categories.subtitle": {
+        "en": "Filter items by section.",
+        "es": "Filtra los artículos por sección.",
+        "fr": "Filtrez les articles par section.",
+        "ar": "قم بتصفية العناصر حسب القسم.",
+    },
+    "sales.categories.all": {
+        "en": "All items",
+        "es": "Todos los artículos",
+        "fr": "Tous les articles",
+        "ar": "جميع العناصر",
+    },
+    "sales.categories.uncategorized": {
+        "en": "Other",
+        "es": "Otros",
+        "fr": "Autres",
+        "ar": "أخرى",
+    },
+    "sales.products.empty": {
+        "en": "No products are available yet.",
+        "es": "Aún no hay productos disponibles.",
+        "fr": "Aucun produit n'est disponible pour le moment.",
+        "ar": "لا توجد منتجات متاحة بعد.",
+    },
+    "sales.products.empty_category": {
+        "en": "No items in this category yet.",
+        "es": "No hay artículos en esta categoría todavía.",
+        "fr": "Aucun article dans cette catégorie pour le moment.",
+        "ar": "لا توجد عناصر في هذه الفئة بعد.",
+    },
+    "sales.products.subtitle": {
+        "en": "All changes update the cart instantly.",
+        "es": "Los cambios se actualizan en el carrito al instante.",
+        "fr": "Les modifications mettent immédiatement à jour le panier.",
+        "ar": "يتم تحديث السلة فورًا مع أي تغييرات.",
+    },
     "field.quantity": {"en": "Quantity", "es": "Cantidad", "fr": "Quantité", "ar": "الكمية"},
     "action.add_to_cart": {"en": "Add to Cart", "es": "Agregar al carrito", "fr": "Ajouter au panier", "ar": "إضافة إلى السلة"},
     "action.remove_selected": {
@@ -207,6 +255,12 @@ TRANSLATIONS: Dict[str, Dict[str, str]] = {
     },
     "action.clear_cart": {"en": "Clear Cart", "es": "Vaciar carrito", "fr": "Vider le panier", "ar": "إفراغ السلة"},
     "sales.summary.title": {"en": "Checkout Summary", "es": "Resumen de pago", "fr": "Récapitulatif", "ar": "ملخص الدفع"},
+    "sales.summary.subtitle": {
+        "en": "Review order details before payment.",
+        "es": "Revisa los detalles del pedido antes de pagar.",
+        "fr": "Vérifiez les détails de la commande avant le paiement.",
+        "ar": "راجع تفاصيل الطلب قبل الدفع.",
+    },
     "label.subtotal": {"en": "Subtotal", "es": "Subtotal", "fr": "Sous-total", "ar": "الإجمالي الفرعي"},
     "label.balance_due": {"en": "Balance Due", "es": "Saldo a pagar", "fr": "Montant dû", "ar": "المبلغ المستحق"},
     "action.finalize_sale": {"en": "Finalize Sale", "es": "Finalizar venta", "fr": "Finaliser la vente", "ar": "إتمام البيع"},
@@ -1095,25 +1149,28 @@ class SalesFrame(ttk.Frame):
 
         self.hero_title_var = tk.StringVar()
         self.hero_subtitle_var = tk.StringVar()
-        self.quick_add_title_var = tk.StringVar()
-        self.product_id_label_var = tk.StringVar()
-        self.quantity_label_var = tk.StringVar()
-        self.add_to_cart_text = tk.StringVar()
+        self.categories_title_var = tk.StringVar()
+        self.categories_subtitle_var = tk.StringVar()
+        self.products_empty_var = tk.StringVar()
         self.remove_selected_text = tk.StringVar()
         self.clear_cart_text = tk.StringVar()
         self.summary_title_var = tk.StringVar()
+        self.summary_subtitle_var = tk.StringVar()
         self.subtotal_label_var = tk.StringVar()
         self.balance_label_var = tk.StringVar()
         self.finalize_button_text = tk.StringVar()
         self.print_button_text = tk.StringVar()
-        self.cart_title_var = tk.StringVar()
+
+        self.category_var = tk.StringVar(value="__all__")
+        self._category_keys: List[str] = []
+        self._product_card_frames: List[ttk.Frame] = []
 
         self.container = ttk.Frame(self, style="Background.TFrame")
         self.container.grid(row=0, column=0, sticky="nsew")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
-        self.container.grid_rowconfigure(1, weight=1)
+        self.container.grid_rowconfigure(0, weight=1)
 
         self._build_ui()
         self.apply_settings()
@@ -1123,180 +1180,388 @@ class SalesFrame(ttk.Frame):
     def _build_ui(self) -> None:
         container = self.container
 
-        hero = ttk.Frame(container, style="Hero.TFrame", padding=(24, 18))
-        hero.grid(row=0, column=0, sticky="ew", pady=(0, 24))
-        hero.grid_columnconfigure(0, weight=1)
+        layout = ttk.Frame(container, style="Background.TFrame")
+        layout.grid(row=0, column=0, sticky="nsew")
+        layout.grid_columnconfigure(0, weight=0)
+        layout.grid_columnconfigure(1, weight=1)
+        layout.grid_columnconfigure(2, weight=0)
+        layout.grid_rowconfigure(0, weight=1)
 
-        ttk.Label(hero, textvariable=self.hero_title_var, style="HeroTitle.TLabel").grid(
+        self.category_panel = ttk.Frame(layout, style="SidePanel.TFrame", padding=(24, 28))
+        self.category_panel.grid(row=0, column=0, sticky="nsw", padx=(0, 24))
+        self.category_panel.grid_rowconfigure(2, weight=1)
+
+        ttk.Label(
+            self.category_panel,
+            textvariable=self.categories_title_var,
+            style="SidePanelTitle.TLabel",
+        ).grid(row=0, column=0, sticky="w")
+        ttk.Label(
+            self.category_panel,
+            textvariable=self.categories_subtitle_var,
+            style="SidePanelSubtitle.TLabel",
+        ).grid(row=1, column=0, sticky="w", pady=(6, 18))
+
+        self.category_list = ttk.Frame(self.category_panel, style="SidePanel.TFrame")
+        self.category_list.grid(row=2, column=0, sticky="nsew")
+
+        products_panel = ttk.Frame(layout, style="Background.TFrame", padding=(12, 24))
+        products_panel.grid(row=0, column=1, sticky="nsew")
+        products_panel.grid_columnconfigure(0, weight=1)
+        products_panel.grid_rowconfigure(1, weight=1)
+
+        header = ttk.Frame(products_panel, style="Background.TFrame")
+        header.grid(row=0, column=0, sticky="ew", pady=(0, 18))
+        header.grid_columnconfigure(0, weight=1)
+
+        ttk.Label(header, textvariable=self.hero_title_var, style="WorkspaceTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
         ttk.Label(
-            hero,
+            header,
             textvariable=self.hero_subtitle_var,
-            style="HeroSubtitle.TLabel",
+            style="WorkspaceSubtitle.TLabel",
         ).grid(row=1, column=0, sticky="w", pady=(4, 0))
-        ttk.Label(hero, textvariable=self.cart_summary_var, style="HeroStat.TLabel").grid(
-            row=2, column=0, sticky="w", pady=(16, 0)
+        ttk.Label(
+            header,
+            textvariable=self.cart_summary_var,
+            style="WorkspaceMeta.TLabel",
+        ).grid(row=0, column=1, rowspan=2, sticky="ne")
+
+        self.products_canvas = tk.Canvas(
+            products_panel,
+            highlightthickness=0,
+            bd=0,
+            background=PALETTE["bg"],
+        )
+        self.products_canvas.grid(row=1, column=0, sticky="nsew")
+
+        self.products_scrollbar = ttk.Scrollbar(
+            products_panel, orient=tk.VERTICAL, command=self.products_canvas.yview
+        )
+        self.products_scrollbar.grid(row=1, column=1, sticky="ns")
+        self.products_canvas.configure(yscrollcommand=self.products_scrollbar.set)
+
+        self.products_frame = ttk.Frame(self.products_canvas, style="Background.TFrame")
+        self.products_window = self.products_canvas.create_window(
+            (0, 0), window=self.products_frame, anchor="nw"
         )
 
-        workflow = ttk.Frame(container, style="Background.TFrame")
-        workflow.grid(row=1, column=0, sticky="nsew")
-        workflow.grid_columnconfigure(0, weight=1)
-        workflow.grid_columnconfigure(1, weight=1)
-        workflow.grid_rowconfigure(1, weight=1)
-
-        scanner_card = ttk.Frame(workflow, style="Card.TFrame", padding=24)
-        scanner_card.grid(row=0, column=0, sticky="nsew", padx=(0, 16))
-        scanner_card.grid_columnconfigure(1, weight=1)
-
-        ttk.Label(scanner_card, textvariable=self.quick_add_title_var, style="SectionTitle.TLabel").grid(
-            row=0, column=0, columnspan=2, sticky="w"
+        self.products_frame.bind(
+            "<Configure>",
+            lambda event: self.products_canvas.configure(scrollregion=self.products_canvas.bbox("all")),
         )
-        ttk.Separator(scanner_card).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 16))
-
-        ttk.Label(scanner_card, textvariable=self.product_id_label_var, style="FieldLabel.TLabel").grid(
-            row=2, column=0, sticky="w"
-        )
-        ttk.Entry(scanner_card, textvariable=self.product_id_var).grid(
-            row=2, column=1, sticky="ew", pady=(0, 12)
+        self.products_canvas.bind(
+            "<Configure>",
+            lambda event: self.products_canvas.itemconfigure(self.products_window, width=event.width),
         )
 
-        ttk.Label(scanner_card, textvariable=self.quantity_label_var, style="FieldLabel.TLabel").grid(
-            row=3, column=0, sticky="w"
-        )
-        ttk.Entry(scanner_card, textvariable=self.quantity_var).grid(
-            row=3, column=1, sticky="ew", pady=(0, 12)
-        )
+        summary_panel = ttk.Frame(layout, style="SummaryPanel.TFrame", padding=(24, 28))
+        summary_panel.grid(row=0, column=2, sticky="nse", padx=(24, 0))
+        summary_panel.grid_rowconfigure(2, weight=1)
 
-        ttk.Button(
-            scanner_card,
-            textvariable=self.add_to_cart_text,
-            command=self.add_to_cart,
-            style="Accent.TButton",
-        ).grid(row=4, column=0, columnspan=2, sticky="ew")
-
-        secondary_actions = ttk.Frame(scanner_card, style="Background.TFrame")
-        secondary_actions.grid(row=5, column=0, columnspan=2, sticky="ew", pady=(16, 0))
-        secondary_actions.grid_columnconfigure(0, weight=1)
-        secondary_actions.grid_columnconfigure(1, weight=1)
-
-        ttk.Button(
-            secondary_actions,
-            textvariable=self.remove_selected_text,
-            command=self.remove_selected_item,
-            style="Secondary.TButton",
-        ).grid(row=0, column=0, sticky="ew", padx=(0, 12))
-        ttk.Button(
-            secondary_actions,
-            textvariable=self.clear_cart_text,
-            command=self.clear_cart,
-            style="Secondary.TButton",
-        ).grid(row=0, column=1, sticky="ew")
-
-        totals_card = ttk.Frame(workflow, style="Card.TFrame", padding=24)
-        totals_card.grid(row=0, column=1, sticky="nsew")
-        totals_card.grid_columnconfigure(1, weight=1)
-
-        ttk.Label(totals_card, textvariable=self.summary_title_var, style="SectionTitle.TLabel").grid(
-            row=0, column=0, columnspan=2, sticky="w"
-        )
-        ttk.Separator(totals_card).grid(row=1, column=0, columnspan=2, sticky="ew", pady=(8, 16))
-
-        ttk.Label(totals_card, textvariable=self.subtotal_label_var, style="FieldLabel.TLabel").grid(
-            row=2, column=0, sticky="w"
-        )
-        ttk.Label(totals_card, textvariable=self.subtotal_var, style="TotalsValue.TLabel").grid(
-            row=2, column=1, sticky=tk.E
-        )
-
-        ttk.Label(totals_card, textvariable=self.balance_label_var, style="FieldLabel.TLabel").grid(
-            row=3, column=0, sticky="w"
-        )
-        ttk.Label(totals_card, textvariable=self.total_var, style="TotalsValueAccent.TLabel").grid(
-            row=3, column=1, sticky=tk.E
-        )
-
-        ttk.Button(
-            totals_card,
-            textvariable=self.finalize_button_text,
-            command=self.finalize_sale,
-            style="Accent.TButton",
-        ).grid(row=4, column=0, columnspan=2, sticky="ew", pady=(16, 8))
-
-        self.print_button = ttk.Button(
-            totals_card,
-            textvariable=self.print_button_text,
-            command=self.print_invoice,
-            style="Secondary.TButton",
-        )
-        self.print_button.grid(row=5, column=0, columnspan=2, sticky="ew")
-        self.print_button.state(["disabled"])
-
-        cart_card = ttk.Frame(workflow, style="Card.TFrame", padding=24)
-        cart_card.grid(row=1, column=0, columnspan=2, sticky="nsew", pady=(24, 0))
-        cart_card.grid_rowconfigure(2, weight=1)
-        cart_card.grid_columnconfigure(0, weight=1)
-
-        ttk.Label(cart_card, textvariable=self.cart_title_var, style="SectionTitle.TLabel").grid(
+        ttk.Label(summary_panel, textvariable=self.summary_title_var, style="SummaryTitle.TLabel").grid(
             row=0, column=0, sticky="w"
         )
-        ttk.Separator(cart_card).grid(row=1, column=0, sticky="ew", pady=(8, 16))
+        ttk.Label(
+            summary_panel,
+            textvariable=self.summary_subtitle_var,
+            style="SummarySubtitle.TLabel",
+        ).grid(row=1, column=0, sticky="w", pady=(4, 18))
 
-        columns = ("product_id", "name", "price", "quantity", "line_total")
-        self.tree = ttk.Treeview(cart_card, columns=columns, show="headings", height=10)
+        columns = ("product_id", "name", "quantity", "line_total")
+        self.tree = ttk.Treeview(summary_panel, columns=columns, show="headings", height=10)
+        widths = {"product_id": 110, "name": 180, "quantity": 80, "line_total": 120}
+        anchors = {
+            "product_id": tk.W,
+            "name": tk.W,
+            "quantity": tk.CENTER,
+            "line_total": tk.E,
+        }
         for column in columns:
-            anchor = tk.CENTER if column not in {"name", "line_total"} else tk.W
-            width = 110 if column not in {"name", "line_total"} else 150
-            if column == "name":
-                width = 240
-            self.tree.column(column, anchor=anchor, width=width)
-        self.tree.configure(selectmode="browse")
+            self.tree.column(column, width=widths[column], anchor=anchors[column], stretch=False)
         self.tree.grid(row=2, column=0, sticky="nsew")
+        summary_panel.grid_rowconfigure(2, weight=1)
 
-        scrollbar = ttk.Scrollbar(cart_card, orient=tk.VERTICAL, command=self.tree.yview)
-        self.tree.configure(yscrollcommand=scrollbar.set)
-        scrollbar.grid(row=2, column=1, sticky="ns")
+        tree_scroll = ttk.Scrollbar(summary_panel, orient=tk.VERTICAL, command=self.tree.yview)
+        self.tree.configure(yscrollcommand=tree_scroll.set)
+        tree_scroll.grid(row=2, column=1, sticky="ns")
 
         self.tree.tag_configure("evenrow", background=PALETTE["surface"])
         self.tree.tag_configure("oddrow", background=PALETTE["surface_alt"])
         self.tree.bind("<Delete>", lambda _event: self.remove_selected_item())
         self.tree.bind("<Double-1>", lambda _event: self.remove_selected_item())
 
+        actions = ttk.Frame(summary_panel, style="SummaryPanel.TFrame")
+        actions.grid(row=3, column=0, sticky="ew", pady=(16, 0))
+        actions.grid_columnconfigure(0, weight=1)
+        actions.grid_columnconfigure(1, weight=1)
+
+        ttk.Button(
+            actions,
+            textvariable=self.remove_selected_text,
+            command=self.remove_selected_item,
+            style="Ghost.TButton",
+        ).grid(row=0, column=0, sticky="ew", padx=(0, 12))
+        ttk.Button(
+            actions,
+            textvariable=self.clear_cart_text,
+            command=self.clear_cart,
+            style="Ghost.TButton",
+        ).grid(row=0, column=1, sticky="ew")
+
+        totals = ttk.Frame(summary_panel, style="SummaryPanel.TFrame")
+        totals.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(24, 16))
+        totals.grid_columnconfigure(1, weight=1)
+
+        ttk.Label(totals, textvariable=self.subtotal_label_var, style="SummaryMeta.TLabel").grid(
+            row=0, column=0, sticky="w"
+        )
+        ttk.Label(totals, textvariable=self.subtotal_var, style="SummaryValue.TLabel").grid(
+            row=0, column=1, sticky="e"
+        )
+        ttk.Label(totals, textvariable=self.balance_label_var, style="SummaryMeta.TLabel").grid(
+            row=1, column=0, sticky="w", pady=(8, 0)
+        )
+        ttk.Label(totals, textvariable=self.total_var, style="SummaryTotal.TLabel").grid(
+            row=1, column=1, sticky="e", pady=(8, 0)
+        )
+
+        self.finalize_button = ttk.Button(
+            summary_panel,
+            textvariable=self.finalize_button_text,
+            command=self.finalize_sale,
+            style="Pay.TButton",
+        )
+        self.finalize_button.grid(row=5, column=0, columnspan=2, sticky="ew")
+
+        self.print_button = ttk.Button(
+            summary_panel,
+            textvariable=self.print_button_text,
+            command=self.print_invoice,
+            style="Secondary.TButton",
+        )
+        self.print_button.grid(row=6, column=0, columnspan=2, sticky="ew", pady=(12, 0))
+        self.print_button.state(["disabled"])
+
         self.status_label = ttk.Label(container, textvariable=self.status_var, style="Status.TLabel")
-        self.status_label.grid(row=2, column=0, sticky="w", pady=(24, 0))
+        self.status_label.grid(row=1, column=0, sticky="w", pady=(18, 0))
 
     def apply_settings(self) -> None:
         self.hero_title_var.set(self.app.t("sales.hero.title"))
         self.hero_subtitle_var.set(self.app.t("sales.hero.subtitle"))
-        self.quick_add_title_var.set(self.app.t("sales.quick_add"))
-        self.product_id_label_var.set(self.app.t("field.product_id"))
-        self.quantity_label_var.set(self.app.t("field.quantity"))
-        self.add_to_cart_text.set(self.app.t("action.add_to_cart"))
-        self.remove_selected_text.set(self.app.t("action.remove_selected"))
-        self.clear_cart_text.set(self.app.t("action.clear_cart"))
+        self.categories_title_var.set(self.app.t("sales.categories.title"))
+        self.categories_subtitle_var.set(self.app.t("sales.categories.subtitle"))
         self.summary_title_var.set(self.app.t("sales.summary.title"))
+        self.summary_subtitle_var.set(self.app.t("sales.summary.subtitle"))
         self.subtotal_label_var.set(self.app.t("label.subtotal"))
         self.balance_label_var.set(self.app.t("label.balance_due"))
         self.finalize_button_text.set(self.app.t("action.finalize_sale"))
         self.print_button_text.set(self.app.t("action.print_invoice"))
-        self.cart_title_var.set(self.app.t("sales.cart.title"))
+        self.remove_selected_text.set(self.app.t("action.remove_selected"))
+        self.clear_cart_text.set(self.app.t("action.clear_cart"))
+        self.products_empty_var.set(self.app.t("sales.products.empty"))
 
         headings = {
             "product_id": self.app.t("sales.cart.heading.product_id"),
             "name": self.app.t("sales.cart.heading.name"),
-            "price": self.app.t("sales.cart.heading.price"),
             "quantity": self.app.t("sales.cart.heading.quantity"),
             "line_total": self.app.t("sales.cart.heading.total"),
         }
         for column, text in headings.items():
             self.tree.heading(column, text=text)
 
+        self._render_categories()
+        self._render_product_cards()
         self._populate_cart_tree()
         self._update_totals()
         self.status_var.set(self.app.t("sales.status.prompt"))
 
     def _refresh_inventory_cache(self) -> None:
-        self.inventory_cache = {product.product_id: product for product in self.inventory_provider()}
+        products = list(self.inventory_provider())
+        self.inventory_cache = {product.product_id: product for product in products}
+
+        category_keys = sorted({self._category_key(product) for product in products})
+        if "__uncategorized__" in category_keys:
+            category_keys = [key for key in category_keys if key != "__uncategorized__"] + [
+                "__uncategorized__"
+            ]
+
+        self._category_keys = ["__all__"] + category_keys
+        if self.category_var.get() not in self._category_keys:
+            self.category_var.set("__all__")
+
+        self._render_categories()
+        self._render_product_cards()
+
+    def _render_categories(self) -> None:
+        if not hasattr(self, "category_list"):
+            return
+
+        for child in self.category_list.winfo_children():
+            child.destroy()
+
+        if not self._category_keys:
+            self._category_keys = ["__all__"]
+
+        if self.category_var.get() not in self._category_keys:
+            self.category_var.set("__all__")
+
+        for key in self._category_keys:
+            ttk.Radiobutton(
+                self.category_list,
+                text=self._format_category_label(key),
+                value=key,
+                variable=self.category_var,
+                command=self._on_category_selected,
+                style="Category.TRadiobutton",
+                indicatoron=0,
+                padding=12,
+                takefocus=0,
+            ).pack(fill="x", pady=6)
+
+    def _on_category_selected(self) -> None:
+        self._render_product_cards()
+
+    def _format_category_label(self, key: str) -> str:
+        if key == "__all__":
+            return self.app.t("sales.categories.all")
+        if key == "__uncategorized__":
+            return self.app.t("sales.categories.uncategorized")
+        return key
+
+    def _category_key(self, product: Product) -> str:
+        product_id = (product.product_id or "").strip()
+        if "-" in product_id:
+            prefix = product_id.split("-", 1)[0].replace("_", " ").strip()
+            if prefix:
+                return prefix.title()
+
+        name = (product.name or "").strip()
+        if not name:
+            return "__uncategorized__"
+
+        token = name.split()[0]
+        cleaned = token.strip(".,")
+        if not cleaned or cleaned.isdigit():
+            return "__uncategorized__"
+        return cleaned.title()
+
+    def _category_matches(self, product: Product) -> bool:
+        selected = self.category_var.get()
+        if selected == "__all__":
+            return True
+        return self._category_key(product) == selected
+
+    def _product_icon_for_category(self, category_key: str) -> str:
+        base = category_key.lower().split()[0] if category_key else ""
+        icon_map = {
+            "coffee": "☕",
+            "drink": "🥤",
+            "juice": "🧃",
+            "tea": "🍵",
+            "pizza": "🍕",
+            "burger": "🍔",
+            "sandwich": "🥪",
+            "salad": "🥗",
+            "dessert": "🍰",
+            "taco": "🌮",
+            "pasta": "🍝",
+        }
+        return icon_map.get(base, "🛒")
+
+    def _bind_card_click(self, widget: tk.Widget, product_id: str) -> None:
+        widget.bind(
+            "<Button-1>", lambda _event, pid=product_id: self._quick_add(pid), add="+"
+        )
+        if hasattr(widget, "winfo_children"):
+            for child in widget.winfo_children():
+                self._bind_card_click(child, product_id)
+
+    def _render_product_cards(self) -> None:
+        if not hasattr(self, "products_frame"):
+            return
+
+        for child in self.products_frame.winfo_children():
+            child.destroy()
+        self._product_card_frames.clear()
+
+        for col in range(6):
+            self.products_frame.grid_columnconfigure(col, weight=0)
+
+        visible_products = [
+            product
+            for product in self.inventory_cache.values()
+            if self._category_matches(product)
+        ]
+
+        if not visible_products:
+            message = (
+                self.products_empty_var.get()
+                if not self.inventory_cache
+                else self.app.t("sales.products.empty_category")
+            )
+            ttk.Label(
+                self.products_frame,
+                text=message,
+                style="EmptyState.TLabel",
+                anchor="center",
+                justify="center",
+                wraplength=360,
+            ).grid(row=0, column=0, sticky="nsew", padx=24, pady=48)
+            self.products_frame.grid_columnconfigure(0, weight=1)
+            return
+
+        columns = min(3, max(1, len(visible_products)))
+        for column in range(columns):
+            self.products_frame.grid_columnconfigure(column, weight=1)
+
+        for index, product in enumerate(visible_products):
+            row = index // columns
+            column = index % columns
+
+            card = ttk.Frame(self.products_frame, style="ProductCard.TFrame", padding=18)
+            card.grid(row=row, column=column, padx=12, pady=12, sticky="nsew")
+            card.grid_propagate(False)
+            card.configure(width=190, height=160)
+
+            icon_label = ttk.Label(
+                card,
+                text=self._product_icon_for_category(self._category_key(product)),
+                style="ProductIcon.TLabel",
+            )
+            icon_label.pack(pady=(0, 12))
+
+            name_label = ttk.Label(
+                card,
+                text=product.name,
+                style="ProductName.TLabel",
+                justify="center",
+                wraplength=150,
+            )
+            name_label.pack(fill="x")
+
+            price_label = ttk.Label(
+                card,
+                text=self.app.format_money(product.price),
+                style="ProductPrice.TLabel",
+            )
+            price_label.pack(pady=(8, 0))
+
+            stock_label = ttk.Label(
+                card,
+                text=f"{self.app.t('field.stock')}: {product.stock}",
+                style="ProductMeta.TLabel",
+            )
+            stock_label.pack(pady=(2, 0))
+
+            self._bind_card_click(card, product.product_id)
+            self._product_card_frames.append(card)
+
+    def _quick_add(self, product_id: str) -> None:
+        self.product_id_var.set(product_id)
+        self.quantity_var.set("1")
+        self.add_to_cart()
 
     def _set_status(self, message: str, accent: bool = False) -> None:
         self.status_var.set(message)
@@ -1381,7 +1646,6 @@ class SalesFrame(ttk.Frame):
                 values=(
                     product_id,
                     data["name"],
-                    self.app.format_money(data["price"]),
                     data["quantity"],
                     self.app.format_money(data["line_total"]),
                 ),
@@ -2135,6 +2399,8 @@ class POSApp(tk.Tk):
         style.configure("Background.TFrame", background=PALETTE["bg"])
         style.configure("NavBar.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
         style.configure("Card.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
+        style.configure("SidePanel.TFrame", background=PALETTE["panel"], relief="flat", borderwidth=0)
+        style.configure("SummaryPanel.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
         style.configure("Hero.TFrame", background=PALETTE["primary"], relief="flat", borderwidth=0)
 
         style.configure("TLabel", background=PALETTE["surface"], foreground=PALETTE["text"], font=(FONT_FAMILY, 11))
@@ -2181,6 +2447,102 @@ class POSApp(tk.Tk):
             font=(FONT_FAMILY, 24, "bold"),
         )
         style.configure(
+            "SidePanelTitle.TLabel",
+            background=PALETTE["panel"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 18, "bold"),
+        )
+        style.configure(
+            "SidePanelSubtitle.TLabel",
+            background=PALETTE["panel"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 11),
+        )
+        style.configure(
+            "WorkspaceTitle.TLabel",
+            background=PALETTE["bg"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 26, "bold"),
+        )
+        style.configure(
+            "WorkspaceSubtitle.TLabel",
+            background=PALETTE["bg"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 12),
+        )
+        style.configure(
+            "WorkspaceMeta.TLabel",
+            background=PALETTE["bg"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 11, "bold"),
+        )
+        style.configure(
+            "SummaryTitle.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 17, "bold"),
+        )
+        style.configure(
+            "SummarySubtitle.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 11),
+        )
+        style.configure(
+            "SummaryMeta.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 11),
+        )
+        style.configure(
+            "SummaryValue.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 14, "bold"),
+        )
+        style.configure(
+            "SummaryTotal.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["primary"],
+            font=(FONT_FAMILY, 24, "bold"),
+        )
+        style.configure(
+            "ProductCard.TFrame",
+            background=PALETTE["surface"],
+            borderwidth=1,
+            relief="solid",
+        )
+        style.configure(
+            "ProductIcon.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["accent"],
+            font=(FONT_FAMILY, 28),
+        )
+        style.configure(
+            "ProductName.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 12, "bold"),
+        )
+        style.configure(
+            "ProductPrice.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 11, "bold"),
+        )
+        style.configure(
+            "ProductMeta.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 10),
+        )
+        style.configure(
+            "EmptyState.TLabel",
+            background=PALETTE["bg"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 12),
+        )
+        style.configure(
             "Status.TLabel",
             background=PALETTE["bg"],
             foreground=PALETTE["muted"],
@@ -2211,6 +2573,17 @@ class POSApp(tk.Tk):
             background=[("active", PALETTE["primary_dark"]), ("pressed", PALETTE["primary_dark"])],
         )
         style.configure(
+            "Pay.TButton",
+            background=PALETTE["primary"],
+            foreground="#ffffff",
+            font=(FONT_FAMILY, 14, "bold"),
+            padding=(20, 12),
+        )
+        style.map(
+            "Pay.TButton",
+            background=[("active", PALETTE["primary_dark"]), ("pressed", PALETTE["primary_dark"])],
+        )
+        style.configure(
             "Secondary.TButton",
             background=PALETTE["surface_alt"],
             foreground=PALETTE["primary_dark"],
@@ -2220,6 +2593,36 @@ class POSApp(tk.Tk):
             "Secondary.TButton",
             background=[("active", PALETTE["primary"]), ("pressed", PALETTE["primary_dark"])],
             foreground=[("active", "#ffffff"), ("pressed", "#ffffff")],
+        )
+        style.configure(
+            "Ghost.TButton",
+            background=PALETTE["panel"],
+            foreground=PALETTE["muted"],
+            padding=(12, 8),
+            relief="solid",
+            borderwidth=1,
+        )
+        style.map(
+            "Ghost.TButton",
+            background=[("active", PALETTE["surface_alt"]), ("pressed", PALETTE["surface_alt"])],
+            foreground=[("active", PALETTE["text"]), ("pressed", PALETTE["text"])],
+        )
+        style.configure(
+            "Category.TRadiobutton",
+            background=PALETTE["panel"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 12, "bold"),
+            relief="flat",
+            borderwidth=0,
+            focuscolor=PALETTE["panel"],
+        )
+        style.map(
+            "Category.TRadiobutton",
+            background=[
+                ("selected", PALETTE["surface"]),
+                ("active", PALETTE["surface_alt"]),
+            ],
+            foreground=[("selected", PALETTE["text"]), ("active", PALETTE["text"])],
         )
         style.configure(
             "Nav.TMenubutton",
@@ -2252,12 +2655,16 @@ class POSApp(tk.Tk):
         )
         style.configure(
             "Treeview.Heading",
-            background=PALETTE["primary_dark"],
-            foreground="#ffffff",
+            background=PALETTE["panel"],
+            foreground=PALETTE["text"],
             font=(FONT_FAMILY, 11, "bold"),
             relief="flat",
         )
-        style.map("Treeview.Heading", background=[("active", PALETTE["primary"])])
+        style.map(
+            "Treeview.Heading",
+            background=[("active", PALETTE["surface_alt"])],
+            foreground=[("active", PALETTE["text"])],
+        )
 
         style.configure("TScrollbar", troughcolor=PALETTE["surface"], background=PALETTE["primary"])
 
