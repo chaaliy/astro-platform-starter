@@ -2130,6 +2130,7 @@ class POSApp(tk.Tk):
 
         style.configure("TFrame", background=PALETTE["bg"])
         style.configure("Background.TFrame", background=PALETTE["bg"])
+        style.configure("NavBar.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
         style.configure("Card.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
         style.configure("Hero.TFrame", background=PALETTE["primary"], relief="flat", borderwidth=0)
 
@@ -2188,6 +2189,12 @@ class POSApp(tk.Tk):
             foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 10, "bold"),
         )
+        style.configure(
+            "NavCurrent.TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["muted"],
+            font=(FONT_FAMILY, 12, "bold"),
+        )
 
         style.configure("TButton", font=(FONT_FAMILY, 11), padding=(14, 8), borderwidth=0)
         style.configure(
@@ -2210,6 +2217,19 @@ class POSApp(tk.Tk):
             "Secondary.TButton",
             background=[("active", PALETTE["primary"]), ("pressed", PALETTE["primary_dark"])],
             foreground=[("active", "#ffffff"), ("pressed", "#ffffff")],
+        )
+        style.configure(
+            "Nav.TMenubutton",
+            background=PALETTE["primary"],
+            foreground="#ffffff",
+            font=(FONT_FAMILY, 13, "bold"),
+            padding=(24, 14),
+            relief="flat",
+        )
+        style.map(
+            "Nav.TMenubutton",
+            background=[("active", PALETTE["primary_dark"]), ("pressed", PALETTE["primary_dark"])],
+            foreground=[("disabled", "#cbd5f5")],
         )
 
         style.configure(
@@ -2239,18 +2259,40 @@ class POSApp(tk.Tk):
         style.configure("TScrollbar", troughcolor=PALETTE["surface"], background=PALETTE["primary"])
 
     def _build_ui(self) -> None:
-        self.menubar = tk.Menu(self)
-        self.config(menu=self.menubar)
+        self.container = ttk.Frame(self, style="Background.TFrame")
+        self.container.pack(fill=tk.BOTH, expand=True)
+        self.container.grid_columnconfigure(0, weight=1)
+        self.container.grid_rowconfigure(1, weight=1)
 
-        self.navigation_menu = tk.Menu(self.menubar, tearoff=0)
-        self.menubar.add_cascade(label=self.t("menu.navigate"), menu=self.navigation_menu)
-        self._nav_cascade_index = self.menubar.index("end")
+        self.navbar = ttk.Frame(self.container, style="NavBar.TFrame", padding=(24, 18))
+        self.navbar.grid(row=0, column=0, sticky="ew")
+        self.navbar.grid_columnconfigure(0, weight=1)
+
+        self.nav_button_text = tk.StringVar()
+        self.nav_button = ttk.Menubutton(
+            self.navbar,
+            textvariable=self.nav_button_text,
+            style="Nav.TMenubutton",
+            direction="below",
+        )
+        self.nav_button.grid(row=0, column=0, sticky="ew")
+
+        self.navigation_menu = tk.Menu(self.nav_button, tearoff=0)
+        self.nav_button["menu"] = self.navigation_menu
+
+        self.nav_current_view_var = tk.StringVar()
+        self.nav_current_view_label = ttk.Label(
+            self.navbar,
+            textvariable=self.nav_current_view_var,
+            style="NavCurrent.TLabel",
+        )
+        self.nav_current_view_label.grid(row=0, column=1, sticky="e", padx=(16, 0))
 
         self.active_view = tk.StringVar(value="sales")
         self._current_view: Optional[str] = None
 
-        self.content = ttk.Frame(self, style="Background.TFrame")
-        self.content.pack(fill=tk.BOTH, expand=True)
+        self.content = ttk.Frame(self.container, style="Background.TFrame")
+        self.content.grid(row=1, column=0, sticky="nsew")
         self.content.grid_columnconfigure(0, weight=1)
         self.content.grid_rowconfigure(0, weight=1)
 
@@ -2299,12 +2341,15 @@ class POSApp(tk.Tk):
     def apply_settings(self) -> None:
         self.title(self.t("app.title"))
 
-        if hasattr(self, "menubar") and hasattr(self, "navigation_menu"):
-            if self._nav_cascade_index is not None:
-                self.menubar.entryconfig(self._nav_cascade_index, label=self.t("menu.navigate"))
+        if hasattr(self, "nav_button_text"):
+            self.nav_button_text.set(f"{self.t('menu.navigate')} ▾")
+        if hasattr(self, "navigation_menu"):
             for key, entry_index in self._nav_entries.items():
                 label_key = self.views[key]["label_key"]
                 self.navigation_menu.entryconfig(entry_index, label=self.t(label_key))
+        if hasattr(self, "nav_current_view_var") and self._current_view:
+            current_label_key = self.views[self._current_view]["label_key"]
+            self.nav_current_view_var.set(self.t(current_label_key))
 
         self.product_manager.apply_settings()
         self.product_manager.refresh_products()
@@ -2332,6 +2377,10 @@ class POSApp(tk.Tk):
 
         if self.active_view.get() != key:
             self.active_view.set(key)
+
+        if hasattr(self, "nav_current_view_var"):
+            label_key = self.views[key]["label_key"]
+            self.nav_current_view_var.set(self.t(label_key))
 
     def update_settings(self, language: str, currency: str) -> None:
         if language not in SUPPORTED_LANGUAGES:
