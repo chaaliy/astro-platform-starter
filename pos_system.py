@@ -29,18 +29,18 @@ DB_FILE = Path("pos_system.db")
 
 
 PALETTE = {
-    "bg": "#161b2c",
-    "surface": "#1f2538",
-    "surface_alt": "#252c41",
-    "primary": "#ff5b60",
-    "primary_dark": "#e2484d",
-    "accent": "#5b8dff",
-    "text": "#f8fafc",
-    "muted": "#94a3b8",
+    "bg": "#edf2fb",
+    "surface": "#ffffff",
+    "surface_alt": "#e7ecf8",
+    "primary": "#4f46e5",
+    "primary_dark": "#4338ca",
+    "accent": "#0ea5e9",
+    "text": "#1e293b",
+    "muted": "#64748b",
     "hero_fg": "#ffffff",
-    "hero_muted": "#cbd5f5",
-    "panel": "#20273a",
-    "card_border": "#2f364e",
+    "hero_muted": "#e0e7ff",
+    "panel": "#f8fafc",
+    "card_border": "#c7d2fe",
 }
 
 FONT_FAMILY = "Segoe UI"
@@ -2397,13 +2397,36 @@ class POSApp(tk.Tk):
 
         style.configure("TFrame", background=PALETTE["bg"])
         style.configure("Background.TFrame", background=PALETTE["bg"])
-        style.configure("NavBar.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
-        style.configure("Card.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
+        style.configure(
+            "NavBar.TFrame",
+            background=PALETTE["surface"],
+            relief="solid",
+            borderwidth=1,
+            bordercolor=PALETTE["card_border"],
+        )
+        style.configure(
+            "Card.TFrame",
+            background=PALETTE["surface"],
+            relief="solid",
+            borderwidth=1,
+            bordercolor=PALETTE["card_border"],
+        )
         style.configure("SidePanel.TFrame", background=PALETTE["panel"], relief="flat", borderwidth=0)
-        style.configure("SummaryPanel.TFrame", background=PALETTE["surface"], relief="flat", borderwidth=0)
+        style.configure(
+            "SummaryPanel.TFrame",
+            background=PALETTE["surface"],
+            relief="solid",
+            borderwidth=1,
+            bordercolor=PALETTE["card_border"],
+        )
         style.configure("Hero.TFrame", background=PALETTE["primary"], relief="flat", borderwidth=0)
 
-        style.configure("TLabel", background=PALETTE["surface"], foreground=PALETTE["text"], font=(FONT_FAMILY, 11))
+        style.configure(
+            "TLabel",
+            background=PALETTE["surface"],
+            foreground=PALETTE["text"],
+            font=(FONT_FAMILY, 11),
+        )
         style.configure(
             "SectionTitle.TLabel",
             background=PALETTE["surface"],
@@ -2449,7 +2472,7 @@ class POSApp(tk.Tk):
         style.configure(
             "SidePanelTitle.TLabel",
             background=PALETTE["panel"],
-            foreground=PALETTE["text"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 18, "bold"),
         )
         style.configure(
@@ -2461,7 +2484,7 @@ class POSApp(tk.Tk):
         style.configure(
             "WorkspaceTitle.TLabel",
             background=PALETTE["bg"],
-            foreground=PALETTE["text"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 26, "bold"),
         )
         style.configure(
@@ -2473,13 +2496,13 @@ class POSApp(tk.Tk):
         style.configure(
             "WorkspaceMeta.TLabel",
             background=PALETTE["bg"],
-            foreground=PALETTE["muted"],
+            foreground=PALETTE["accent"],
             font=(FONT_FAMILY, 11, "bold"),
         )
         style.configure(
             "SummaryTitle.TLabel",
             background=PALETTE["surface"],
-            foreground=PALETTE["text"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 17, "bold"),
         )
         style.configure(
@@ -2491,13 +2514,13 @@ class POSApp(tk.Tk):
         style.configure(
             "SummaryMeta.TLabel",
             background=PALETTE["surface"],
-            foreground=PALETTE["muted"],
+            foreground=PALETTE["accent"],
             font=(FONT_FAMILY, 11),
         )
         style.configure(
             "SummaryValue.TLabel",
             background=PALETTE["surface"],
-            foreground=PALETTE["text"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 14, "bold"),
         )
         style.configure(
@@ -2511,6 +2534,9 @@ class POSApp(tk.Tk):
             background=PALETTE["surface"],
             borderwidth=1,
             relief="solid",
+            bordercolor=PALETTE["card_border"],
+            lightcolor=PALETTE["card_border"],
+            darkcolor=PALETTE["card_border"],
         )
         style.configure(
             "ProductIcon.TLabel",
@@ -2557,11 +2583,25 @@ class POSApp(tk.Tk):
         style.configure(
             "NavCurrent.TLabel",
             background=PALETTE["surface"],
-            foreground=PALETTE["muted"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 12, "bold"),
         )
 
-        style.configure("TButton", font=(FONT_FAMILY, 11), padding=(14, 8), borderwidth=0)
+        style.configure(
+            "TButton",
+            font=(FONT_FAMILY, 11),
+            padding=(12, 6),
+            borderwidth=1,
+            relief="solid",
+            background=PALETTE["surface"],
+            foreground=PALETTE["primary_dark"],
+            bordercolor=PALETTE["card_border"],
+        )
+        style.map(
+            "TButton",
+            background=[("active", PALETTE["surface_alt"]), ("pressed", PALETTE["surface_alt"])],
+            foreground=[("active", PALETTE["primary_dark"]), ("pressed", PALETTE["primary_dark"])],
+        )
         style.configure(
             "Accent.TButton",
             background=PALETTE["primary"],
@@ -2588,6 +2628,9 @@ class POSApp(tk.Tk):
             background=PALETTE["surface_alt"],
             foreground=PALETTE["primary_dark"],
             padding=(16, 10),
+            borderwidth=1,
+            relief="solid",
+            bordercolor=PALETTE["card_border"],
         )
         style.map(
             "Secondary.TButton",
@@ -2601,6 +2644,7 @@ class POSApp(tk.Tk):
             padding=(12, 8),
             relief="solid",
             borderwidth=1,
+            bordercolor=PALETTE["card_border"],
         )
         style.map(
             "Ghost.TButton",
@@ -2643,7 +2687,7 @@ class POSApp(tk.Tk):
             background=PALETTE["surface"],
             fieldbackground=PALETTE["surface"],
             foreground=PALETTE["text"],
-            bordercolor=PALETTE["surface_alt"],
+            bordercolor=PALETTE["card_border"],
             rowheight=30,
             borderwidth=1,
             font=(FONT_FAMILY, 11),
@@ -2655,18 +2699,23 @@ class POSApp(tk.Tk):
         )
         style.configure(
             "Treeview.Heading",
-            background=PALETTE["panel"],
-            foreground=PALETTE["text"],
+            background=PALETTE["surface_alt"],
+            foreground=PALETTE["primary_dark"],
             font=(FONT_FAMILY, 11, "bold"),
             relief="flat",
         )
         style.map(
             "Treeview.Heading",
             background=[("active", PALETTE["surface_alt"])],
-            foreground=[("active", PALETTE["text"])],
+            foreground=[("active", PALETTE["primary_dark"])],
         )
 
-        style.configure("TScrollbar", troughcolor=PALETTE["surface"], background=PALETTE["primary"])
+        style.configure(
+            "TScrollbar",
+            troughcolor=PALETTE["surface_alt"],
+            background=PALETTE["accent"],
+            bordercolor=PALETTE["card_border"],
+        )
 
     def _build_ui(self) -> None:
         self.container = ttk.Frame(self, style="Background.TFrame")
@@ -2690,7 +2739,14 @@ class POSApp(tk.Tk):
 
         self.navigation_menu = tk.Menu(self.nav_button, tearoff=0)
         self.nav_button["menu"] = self.navigation_menu
-        self.navigation_menu.configure(font=self.nav_font)
+        self.navigation_menu.configure(
+            font=self.nav_font,
+            bg=PALETTE["surface"],
+            fg=PALETTE["text"],
+            activebackground=PALETTE["surface_alt"],
+            activeforeground=PALETTE["text"],
+            borderwidth=0,
+        )
 
         self.nav_current_view_var = tk.StringVar()
         self.nav_current_view_label = ttk.Label(
