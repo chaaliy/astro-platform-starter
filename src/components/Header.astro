@@ -2,9 +2,25 @@
 import Logo from '../components/Logo.astro';
 ---
 
-<nav class="flex flex-wrap items-center gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
-    <a href="/">
-        <Logo />
-    </a>
-    <span class="text-lg font-semibold text-white/80">منصة إدارة وثائق الجمعيات</span>
+<nav class="flex flex-wrap items-center justify-between gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
+    <div class="flex items-center gap-4">
+        <a href="/" class="shrink-0">
+            <Logo />
+        </a>
+        <span class="text-lg font-semibold text-white/80">منصة إدارة وثائق الجمعيات</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 text-sm text-white/70">
+        <a
+            href="/"
+            class="rounded-full bg-white/10 px-4 py-2 font-medium text-white transition hover:bg-white/20"
+        >
+            مولد الوثائق الذكي
+        </a>
+        <a
+            href="/pos"
+            class="rounded-full bg-primary px-4 py-2 font-semibold text-primary-content transition hover:bg-primary/90"
+        >
+            نظام نقاط البيع
+        </a>
+    </div>
 </nav>
